@@ -25,8 +25,8 @@ class App extends React.Component {
       <div className="App">
         <header></header>
         <Route path="/" exact component={Startpage}></Route>
-        <Route path="/dog-breeds" component={Doglist}></Route>
-        {/* <Route path="/dog-breeds/:breed" component={DogDetails}></Route> */}
+        <Route path="/dog-breeds" exact component={Doglist}></Route>
+        <Route path="/dog-breeds/:breed" component={DogDetails}></Route>
       </div>
     );
   }
