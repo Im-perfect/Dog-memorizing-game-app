@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import {Link} from "react-router-dom"
+import {connect} from 'react-redux'
+import getRandomElements from "../getRandomElements";
 
 class Startpage extends React.Component {
   getRandomNumber = () => {
@@ -9,13 +10,9 @@ class Startpage extends React.Component {
   handleClick = () => {
     this.props.dispatch({
       type: "INIT_THREE_BREEDS",
-      payload: [
-        this.props.dogbreeds[this.getRandomNumber()],
-        this.props.dogbreeds[this.getRandomNumber()],
-        this.props.dogbreeds[this.getRandomNumber()]
-      ]
-    });
-  };
+      payload: getRandomElements(this.props.dogbreeds,3)
+    })
+  }
   render() {
     return (
       <div>
