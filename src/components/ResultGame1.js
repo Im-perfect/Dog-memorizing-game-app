@@ -20,6 +20,7 @@ export default class ResultGame1 extends React.Component {
             width="32px"
           /> */}
           <h1>&#x2716;MEOW!</h1>
+          <p>Correct breed: {this.props.breed}</p>
         </div>
       );
     }
