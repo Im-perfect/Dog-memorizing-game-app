@@ -6,6 +6,7 @@ import Doglist from "./components/Doglist";
 import DogDetails from "./components/DogDetails";
 import superagent from "superagent";
 import {connect} from 'react-redux'
+import Game2 from './components/Game2'
 
 class App extends React.Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends React.Component {
         <Route path="/" exact component={Startpage}></Route>
         <Route path="/dog-breeds" exact component={Doglist}></Route>
         <Route path="/dog-breeds/:breed" component={DogDetails}></Route>
+        <Route path="/game2" component={Game2}></Route>
       </div>
     );
   }
