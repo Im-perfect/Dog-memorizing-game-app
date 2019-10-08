@@ -1,5 +1,6 @@
 import React from "react";
 import superagent from "superagent";
+import getRandomElements from '../getRandomElements'
 
 export default class DogDetails extends React.Component {
   state = { images: null };
@@ -15,11 +16,14 @@ export default class DogDetails extends React.Component {
       .catch(err => console.err(err));
   }
   render() {
+    const images = this.state.images
+
     return (
       <div>
           <h1>{this.props.match.params.breed}</h1>
-        {this.state.images
-          ? this.state.images.slice(0,10).map(image => (
+        {images
+          ? getRandomElements(images,10)
+          .map(image => (
               <img src={image} alt={this.props.match.params.breed} key={image} />
             ))
           : "Loading..."}
