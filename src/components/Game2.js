@@ -1,42 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import RandomImage from './RandomImage'
+import GetRandomImage from './GetRandomImage'
+
 
 class Game2 extends React.Component {
+
+
   state = {
     question: 1,
-  
-    
-  }
+    breed: this.props.currentBreeds[
+      Math.floor(Math.random() * this.props.currentBreeds.length)
+    ],
+    imgURL: null,
+    answers: [],
+    currentAnswer: null
 
-  getRandomImage = (breed) => {
-    return <RandomImage breed={breed}/>
-    
   }
 
   checkAnswer = (event) => {
-    console.log(event.target.alt)
-    if(this.props.currentBreeds[0] === event.target.alt){
+    console.log(event)
+    if (this.state.breed === event.target.alt) {
       console.log('correct anwser!')
-    } 
-    if(this.props.currentBreeds[0] !== event.target.alt){
+    }
+    if (this.state.breed !== event.target.alt) {
       console.log('incorrect anwser!')
+    }
   }
-}
-
 
   render() {
 
     return (
       <div>
         <h2>Question {this.state.question}</h2>
-        <p>What dog is this?</p>
-        <p>{this.props.currentBreeds[0]}</p>
+        <p>What picture shows the {this.state.breed}?</p>
+        <GetRandomImage breed={this.props.currentBreeds[0]} checkAnswer={this.checkAnswer} />
+        <GetRandomImage breed={this.props.currentBreeds[1]} checkAnswer={this.checkAnswer} />
+        <GetRandomImage breed={this.props.currentBreeds[2]} checkAnswer={this.checkAnswer} />
 
-          <img onClick={this.checkAnswer} src={this.getRandomImage(this.props.currentBreeds[0])} alt={this.props.currentBreeds[0]} key={this.props.currentBreeds[0]} />
-          <img onClick={this.checkAnswer} src={this.getRandomImage(this.props.currentBreeds[1])} alt={this.props.currentBreeds[1]} key={this.props.currentBreeds[1]} />
-          <img onClick={this.checkAnswer} src={this.getRandomImage(this.props.currentBreeds[2])} alt={this.props.currentBreeds[2]} key={this.props.currentBreeds[2]} />
-        
       </div >
     )
   }
