@@ -1,3 +1,5 @@
+# Click here-> [Deploy](https://dog-memorizing-game.netlify.com/)
+
 # Group Project
 
 #### 🐕🐩 Build a dog breed memorization game. 🐕🐩
