@@ -15,11 +15,17 @@ export default class DogDetails extends React.Component {
       .catch(err => console.err(err));
   }
   render() {
+    const images = this.state.images
+    const getTenRandomElements = (array) => {
+      const shuffled = array.sort(() => 0.5 - Math.random())
+      return shuffled.slice(0,10)
+    }
     return (
       <div>
           <h1>{this.props.match.params.breed}</h1>
-        {this.state.images
-          ? this.state.images.slice(0,10).map(image => (
+        {images
+          ? getTenRandomElements(images)
+          .map(image => (
               <img src={image} alt={this.props.match.params.breed} key={image} />
             ))
           : "Loading..."}
