@@ -4,22 +4,21 @@ import { Route } from "react-router-dom";
 import Startpage from "./components/Startpage";
 import Doglist from "./components/Doglist";
 import DogDetails from "./components/DogDetails";
+
+import {initBreeds, getBreeds} from './actions/breeds'
+
 import Game1 from './components/Game1'
 import superagent from "superagent";
 import {connect} from 'react-redux'
 import Game2 from './components/Game2'
 
+
 class App extends React.Component {
   componentDidMount() {
-    superagent
-      .get("https://dog.ceo/api/breeds/list/all")
-      .then(res =>
-        this.props.dispatch({
-          type: "INIT_BREEDS",
-          payload: Object.keys(res.body.message)
-        })
-      )
-      .catch(err => console.err(err));
+    if(this.props.dogbreeds.length !== 0){
+      return
+    }
+    this.props.getBreeds()
   }
 
   render() {
@@ -37,4 +36,15 @@ class App extends React.Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = (state) => {
+  return {
+    dogbreeds:state.dogbreeds
+  }
+}
+
+const mapDispatchToProps = {
+  initBreeds,
+  getBreeds
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
