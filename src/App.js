@@ -6,6 +6,7 @@ import Doglist from "./components/Doglist";
 import DogDetails from "./components/DogDetails";
 import superagent from "superagent";
 import {connect} from 'react-redux'
+import {initBreeds} from './actions/breeds'
 
 class App extends React.Component {
   componentDidMount() {
@@ -31,5 +32,7 @@ class App extends React.Component {
     );
   }
 }
-
+const mapDispatchToProps = {
+  initBreeds
+}
 export default connect()(App);
