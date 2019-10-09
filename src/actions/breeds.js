@@ -15,4 +15,18 @@ export function getBreeds() {
     }
 }
 
+export const initThreeBreeds = (breeds) => {
+  return {
+      type: "INIT_THREE_BREEDS",
+      payload: breeds
+  }
+}
+
+export const addMoreBreeds = (breeds) => {
+  return {
+    type: 'ADD_MORE_BREEDS',
+    payload:breeds
+  }
+}
+
 

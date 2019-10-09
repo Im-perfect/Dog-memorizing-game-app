@@ -23,6 +23,8 @@ const reducer = (state = initialState, action = {}) => {
           streaks: 0,
           level: state.level +1
         }
+      case 'RESET_ANSWERS':
+        return initialState
       default:
         return state;
     }
