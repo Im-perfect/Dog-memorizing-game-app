@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import Game1 from './Game1'
 import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
+import {addMoreBreeds} from '../actions/breeds'
+import getRandomElements from '../getRandomElements'
 class StartGame1 extends React.Component {
   state = {
     breed: null,
@@ -49,8 +51,13 @@ class StartGame1 extends React.Component {
        if (answer === this.state.breed) {
           this.setState({ result: true });
           this.props.correctAnswer()
-            if(this.props.streaks===4){
+            if(this.props.streaks===1){
               this.props.levelUp()
+              this.props.addMoreBreeds(getRandomElements(
+                this.props.dogbreeds
+                  .filter(breed => !this.props.currentBreeds.includes(breed))
+                , 3)
+              )
             }
           setTimeout(this.startGame, 1000);
         } else {
@@ -75,6 +82,7 @@ class StartGame1 extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    dogbreeds: state.dogbreeds,
     currentBreeds: state.currentBreeds,
     streaks: state.answers.streaks
   };
@@ -84,7 +92,8 @@ const mapDispatchToProps = {
   correctAnswer,
   wrongAnswer,
   levelUp,
-  resetAnswers
+  resetAnswers,
+  addMoreBreeds
 }
 
 
