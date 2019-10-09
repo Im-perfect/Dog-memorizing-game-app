@@ -1,42 +1,81 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import GetRandomImage from './GetRandomImage'
+import superagent from "superagent";
+
 
 
 class Game2 extends React.Component {
-
-
   state = {
     question: 1,
-    breed: this.props.currentBreeds[
-      Math.floor(Math.random() * this.props.currentBreeds.length)
-    ],
-    imgURL: null,
+    breed: null,
+    imgURL1: null,
+    imgURL2: null,
+    imgURL3: null,
     answers: [],
-    currentAnswer: null
-
   }
 
+  startGame = () => {
+    const currentBreed = this.props.currentBreeds[
+      Math.floor(Math.random() * this.props.currentBreeds.length)
+    ]
+
+    superagent
+      .get(`https://dog.ceo/api/breed/${this.props.currentBreeds[0]}/images/random`)
+      .then(response => this.setState({
+        imgURL1: response.body.message,
+        breed: currentBreed,
+      }))
+      .catch(err => console.log(err));
+
+      superagent
+      .get(`https://dog.ceo/api/breed/${this.props.currentBreeds[1]}/images/random`)
+      .then(response => this.setState({
+        imgURL2: response.body.message,
+        breed: currentBreed,
+      }))
+      .catch(err => console.log(err));
+
+      superagent
+      .get(`https://dog.ceo/api/breed/${this.props.currentBreeds[2]}/images/random`)
+      .then(response => this.setState({
+        imgURL3: response.body.message,
+        breed: currentBreed,
+      }))
+      .catch(err => console.log(err));
+  }
+  componentDidMount() {
+    this.startGame()
+  }
+
+
   checkAnswer = (event) => {
-    console.log(event)
     if (this.state.breed === event.target.alt) {
-      console.log('correct anwser!')
+      console.log('true!')
+      this.setState({
+       question: this.state.question + 1,
+      })
+      setTimeout(this.startGame, 1000)
     }
     if (this.state.breed !== event.target.alt) {
-      console.log('incorrect anwser!')
+      console.log('false!')
+      this.setState({
+        question: this.state.question + 1,
+      })
+      setTimeout(this.startGame, 1000)
     }
   }
 
   render() {
-
     return (
       <div>
         <h2>Question {this.state.question}</h2>
-        <p>What picture shows the {this.state.breed}?</p>
-        <GetRandomImage breed={this.props.currentBreeds[0]} checkAnswer={this.checkAnswer} />
-        <GetRandomImage breed={this.props.currentBreeds[1]} checkAnswer={this.checkAnswer} />
-        <GetRandomImage breed={this.props.currentBreeds[2]} checkAnswer={this.checkAnswer} />
+        <p>What picture shows the <b>{this.state.breed}</b>?</p>
 
+        <img onClick={this.checkAnswer} src={this.state.imgURL1} height='150px' alt={this.props.currentBreeds[0]} />
+        <br></br>
+        <img onClick={this.checkAnswer} src={this.state.imgURL2} height='150px' alt={this.props.currentBreeds[1]}/>
+        <br></br>
+        <img onClick={this.checkAnswer} src={this.state.imgURL3} height='150px' alt={this.props.currentBreeds[2]}/>
       </div >
     )
   }
@@ -47,7 +86,5 @@ const mapStateToProps = state => {
     currentBreeds: state.currentBreeds,
   };
 };
-export default connect(mapStateToProps)(Game2)
 
-// This game must show the user the name of a breed and 3 images of dogs. 
-// The user must select the correct image that matches the breed name.
+export default connect(mapStateToProps)(Game2)
