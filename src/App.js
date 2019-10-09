@@ -4,11 +4,8 @@ import { Route } from "react-router-dom";
 import Startpage from "./components/Startpage";
 import Doglist from "./components/Doglist";
 import DogDetails from "./components/DogDetails";
-
 import {initBreeds, getBreeds} from './actions/breeds'
-
 import Game1 from './components/Game1'
-import superagent from "superagent";
 import {connect} from 'react-redux'
 import Game2 from './components/Game2'
 

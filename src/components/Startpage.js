@@ -23,7 +23,9 @@ class Startpage extends React.Component {
           <button onClick={this.handleClick}>
             <Link to="/game1">Game 1</Link>
           </button>
-          <button onClick={this.handleClick}><Link to="/game2">Game 2</Link></button>
+          <button onClick={this.handleClick}>
+            <Link to="/game2">Game 2</Link>
+          </button>
           <button>Game 3</button>
         </main>
       </div>
