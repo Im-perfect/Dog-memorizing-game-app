@@ -1,7 +1,8 @@
 import React from "react";
 import ResultGame1 from "./ResultGame1";
-class Game1 extends React.Component {
+import "../css/choiceButton.css";
 
+class Game1 extends React.Component {
   render() {
     return (
       <div>
@@ -11,18 +12,21 @@ class Game1 extends React.Component {
         <h4>Choose from:</h4>
         <div>
           <button
+            className="choice-button"
             id="A"
             onClick={() => this.props.checkAnswer(this.props.answers[0])}
           >
             {this.props.answers[0]}
           </button>
           <button
+            className="choice-button"
             id="B"
             onClick={() => this.props.checkAnswer(this.props.answers[1])}
           >
             {this.props.answers[1]}
           </button>
           <button
+            className="choice-button"
             id="C"
             onClick={() => this.props.checkAnswer(this.props.answers[2])}
           >
@@ -34,5 +38,4 @@ class Game1 extends React.Component {
     );
   }
 }
-export default Game1
-
+export default Game1;

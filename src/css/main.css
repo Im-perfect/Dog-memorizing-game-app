@@ -1,0 +1,15 @@
+html, body {
+    height: 100%; width: 100%;
+    padding: 0; margin: 0;
+}
+
+body {
+  background-image: url("https://embarkvet.com/wp-content/uploads/2018/09/embark-dognames-1.jpg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-color: antiquewhite
+}
+main {
+  display: flex;
+}

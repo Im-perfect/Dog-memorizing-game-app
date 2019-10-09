@@ -9,7 +9,7 @@ import StartGame1 from './components/StartGame1'
 import {connect} from 'react-redux'
 import Game2 from './components/Game2'
 import UserPerformance from "./components/UserPerformance";
-
+import "./css/main.css"
 
 class App extends React.Component {
   componentDidMount() {
