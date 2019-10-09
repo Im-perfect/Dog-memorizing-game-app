@@ -10,8 +10,8 @@ export const wrongAnswer = () => {
     }
 }
 
-export const resetAnswer = () => {
+export const levelUp = () => {
     return {
-        type: 'RESET_ANSWER'
+        type: 'LEVEL_UP'
     }
 }

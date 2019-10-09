@@ -1,7 +1,7 @@
 import React from "react";
 import ResultGame1 from "./ResultGame1";
-
 class Game1 extends React.Component {
+
   render() {
     return (
       <div>
@@ -34,5 +34,5 @@ class Game1 extends React.Component {
     );
   }
 }
-
 export default Game1
+
