@@ -1,15 +1,26 @@
-html, body {
-    height: 100%; width: 100%;
-    padding: 0; margin: 0;
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans&display=swap");
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans", sans-serif;
 }
 
 body {
   background-image: url("https://embarkvet.com/wp-content/uploads/2018/09/embark-dognames-1.jpg");
   background-position: bottom;
   background-repeat: no-repeat;
-  background-size: cover; 
-  background-color: antiquewhite
+  background-size: cover;
 }
 main {
   display: flex;
+}
+
+.game-area {
+    margin: 50px;
+    padding: 0 50px 30px;
+    background-color: rgba(255, 255, 255, 0.9)
 }
