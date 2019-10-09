@@ -5,7 +5,7 @@ import Startpage from "./components/Startpage";
 import Doglist from "./components/Doglist";
 import DogDetails from "./components/DogDetails";
 import {initBreeds, getBreeds} from './actions/breeds'
-import Game1 from './components/Game1'
+import StartGame1 from './components/StartGame1'
 import {connect} from 'react-redux'
 import Game2 from './components/Game2'
 import UserPerformance from "./components/UserPerformance";
@@ -29,7 +29,7 @@ class App extends React.Component {
         <Route path="/game2" component={UserPerformance}></Route>
         <Route path="/game2" component={Game2}></Route>
         <Route path="/game1" component={UserPerformance}></Route>
-        <Route path="/game1" component={Game1}></Route>
+        <Route path="/game1" component={StartGame1}></Route>
 
       </div>
     );
