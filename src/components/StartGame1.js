@@ -2,7 +2,7 @@ import React from 'react'
 import superagent from 'superagent'
 import { connect } from "react-redux";
 import Game1 from './Game1'
-import {correctAnswer, wrongAnswer, levelUp} from '../actions/answers'
+import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
 
 class StartGame1 extends React.Component {
     state = {
@@ -27,10 +27,12 @@ class StartGame1 extends React.Component {
             })
           )
           .catch(err => console.log(err));
+        
       };
 
     componentDidMount(){
-        this.startGame()
+      this.props.resetAnswers()  
+      this.startGame()        
     }
 
     getAnswers = currentBreeds => {
@@ -48,6 +50,9 @@ class StartGame1 extends React.Component {
         if (answer === this.state.breed) {
           this.setState({ result: true });
           this.props.correctAnswer()
+            if(this.props.streaks===4){
+              this.props.levelUp()
+            }
           setTimeout(this.startGame, 1000);
         } else {
           this.setState({ result: false });
@@ -63,14 +68,16 @@ class StartGame1 extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentBreeds: state.currentBreeds
+    currentBreeds: state.currentBreeds,
+    streaks: state.answers.streaks
   };
 };
 
 const mapDispatchToProps = {
   correctAnswer,
   wrongAnswer,
-  levelUp
+  levelUp,
+  resetAnswers
 }
 
 export default connect(mapStateToProps,
