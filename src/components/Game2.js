@@ -11,31 +11,42 @@ class Game2 extends React.Component {
     breed: this.props.currentBreeds[
       Math.floor(Math.random() * this.props.currentBreeds.length)
     ],
-    imgURL: null,
-    answers: [],
-    currentAnswer: null
-
+    breedImages: [this.props.currentBreeds[1], this.props.currentBreeds[2], this.props.currentBreeds[0]],
   }
 
   checkAnswer = (event) => {
-    console.log(event)
+    //console.log(event)
     if (this.state.breed === event.target.alt) {
-      console.log('correct anwser!')
+      this.setState({
+        question: this.state.question + 1,
+        breed: this.props.currentBreeds[
+          Math.floor(Math.random() * this.props.currentBreeds.length)
+        ],
+        breedImages: [this.props.currentBreeds[0], this.props.currentBreeds[1], this.props.currentBreeds[2]],
+      })
     }
     if (this.state.breed !== event.target.alt) {
-      console.log('incorrect anwser!')
+      this.setState({
+        question: this.state.question + 1,
+        breed: this.props.currentBreeds[
+          Math.floor(Math.random() * this.props.currentBreeds.length)
+        ],
+        breedImages: [this.props.currentBreeds[2], this.props.currentBreeds[0], this.props.currentBreeds[1]],
+      })
     }
   }
 
   render() {
-
+console.log(this.state.breedImages)
     return (
       <div>
         <h2>Question {this.state.question}</h2>
-        <p>What picture shows the {this.state.breed}?</p>
-        <GetRandomImage breed={this.props.currentBreeds[0]} checkAnswer={this.checkAnswer} />
-        <GetRandomImage breed={this.props.currentBreeds[1]} checkAnswer={this.checkAnswer} />
-        <GetRandomImage breed={this.props.currentBreeds[2]} checkAnswer={this.checkAnswer} />
+        <p>What picture shows the <b>{this.state.breed}</b>?</p>
+            
+      <GetRandomImage breed={this.state.breedImages[0]} checkAnswer={this.checkAnswer} />,
+      <GetRandomImage breed={this.state.breedImages[1]} checkAnswer={this.checkAnswer} />,
+      <GetRandomImage breed={this.state.breedImages[2]} checkAnswer={this.checkAnswer} />
+    
 
       </div >
     )
