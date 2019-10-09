@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-// import superagent from "superagent";
+import superagent from "superagent";
 import ResultGame1 from "./ResultGame1";
 import {correctAnswer, wrongAnswer, resetAnswer} from '../actions/answers'
 import {getRandomImageOf} from '../actions/breeds'
