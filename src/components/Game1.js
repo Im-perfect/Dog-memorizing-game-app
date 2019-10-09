@@ -7,13 +7,30 @@ import {getRandomImageOf} from '../actions/breeds'
 
 class Game1 extends React.Component {
   state = {
-    breed: this.props.currentBreeds[
-      Math.floor(Math.random() * this.props.currentBreeds.length)
-    ],
+    breed: null,
     imgURL: null,
     answers: [],
     result: null
   };
+
+
+  startGame = () => {
+      const currentBreed = this.props.currentBreeds[
+        Math.floor(Math.random() * this.props.currentBreeds.length)
+      ]
+    superagent
+      .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
+      .then(res =>
+        this.setState({
+          imgURL: res.body.message,
+          breed:currentBreed,
+          answers: this.getAnswers(this.props.currentBreeds),
+          result:null
+        })
+      )
+      .catch(err => console.log(err));
+  }
+  
 
   componentDidMount() {
     // superagent
@@ -25,9 +42,10 @@ class Game1 extends React.Component {
     //   )
     //   .catch(err => console.log(err));
 
-    this.setState({
-      answers: this.getAnswers(this.props.currentBreeds)
-    });
+    // this.setState({
+    //   answers: this.getAnswers(this.props.currentBreeds)
+    // });
+    this.startGame()
   }
 
   getAnswers = currentBreeds => {
@@ -42,16 +60,18 @@ class Game1 extends React.Component {
   };
 
   checkAnswer = answer => {
-    if (answer === this.state.breed) {
-        this.setState({
-            result: true
-        })
-    }
-    return answer === this.state.breed ? this.setState({
-        result: true
-    }):this.setState({
-        result: false
-    })
+      if(answer === this.state.breed) {
+          this.setState({result:true})
+          setTimeout(this.startGame, 1000)
+      } else {
+          this.setState({result:false})
+          setTimeout(this.startGame, 2000)
+      }
+    // return answer === this.state.breed ? this.setState({
+    //     result: true
+    // }):this.setState({
+    //     result: false
+    // })
   };
 
   render() {
@@ -87,7 +107,7 @@ class Game1 extends React.Component {
             {this.state.answers[2]}
           </button>
         </div>
-        <ResultGame1 result={this.state.result}/>
+        <ResultGame1 result={this.state.result} breed={this.state.breed} />
       </div>
     );
   }
