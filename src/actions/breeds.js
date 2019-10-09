@@ -15,4 +15,10 @@ export function getBreeds() {
     }
 }
 
+export const addMoreBreeds = () => {
+  return {
+    type: 'ADD_MORE_BREEDS'
+  }
+}
+
 

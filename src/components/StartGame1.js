@@ -1,9 +1,9 @@
 import React from "react";
 import superagent from "superagent";
 import { connect } from "react-redux";
-import Game1 from "./Game1";
-import { correctAnswer, wrongAnswer, levelUp } from "../actions/answers";
 
+import Game1 from './Game1'
+import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
 class StartGame1 extends React.Component {
   state = {
     breed: null,
@@ -30,6 +30,7 @@ class StartGame1 extends React.Component {
   };
 
   componentDidMount() {
+    this.props.resetAnswers() 
     this.startGame();
   }
 
@@ -44,17 +45,20 @@ class StartGame1 extends React.Component {
     return newAnswers;
   };
 
-  checkAnswer = answer => {
-    if (answer === this.state.breed) {
-      this.setState({ result: true });
-      this.props.correctAnswer();
-      setTimeout(this.startGame, 1000);
-    } else {
-      this.setState({ result: false });
-      this.props.wrongAnswer();
-      setTimeout(this.startGame, 2000);
-    }
-  };
+     checkAnswer = answer => {
+       if (answer === this.state.breed) {
+          this.setState({ result: true });
+          this.props.correctAnswer()
+            if(this.props.streaks===4){
+              this.props.levelUp()
+            }
+          setTimeout(this.startGame, 1000);
+        } else {
+          this.setState({ result: false });
+          this.props.wrongAnswer()
+          setTimeout(this.startGame, 2000);
+        }
+    };
 
   render() {
     return (
@@ -71,15 +75,18 @@ class StartGame1 extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentBreeds: state.currentBreeds
+    currentBreeds: state.currentBreeds,
+    streaks: state.answers.streaks
   };
 };
 
 const mapDispatchToProps = {
   correctAnswer,
   wrongAnswer,
-  levelUp
-};
+  levelUp,
+  resetAnswers
+}
+
 
 export default connect(
   mapStateToProps,
