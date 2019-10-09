@@ -31,3 +31,4 @@ export function getRandomImageOf(breed) {
         .catch(err => console.log(err))
     }
 }
+
