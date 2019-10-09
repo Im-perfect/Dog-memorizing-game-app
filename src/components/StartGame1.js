@@ -2,8 +2,7 @@ import React from 'react'
 import superagent from 'superagent'
 import { connect } from "react-redux";
 import Game1 from './Game1'
-import { correctAnswer, wrongAnswer, resetAnswer } from "../actions/answers";
-import { getRandomImageOf } from "../actions/breeds";
+import {correctAnswer, wrongAnswer, levelUp} from '../actions/answers'
 
 class StartGame1 extends React.Component {
     state = {
@@ -48,15 +47,16 @@ class StartGame1 extends React.Component {
       checkAnswer = answer => {
         if (answer === this.state.breed) {
           this.setState({ result: true });
+          this.props.correctAnswer()
           setTimeout(this.startGame, 1000);
         } else {
           this.setState({ result: false });
+          this.props.wrongAnswer()
           setTimeout(this.startGame, 2000);
         }
     };
 
     render () {
-            this.props.getRandomImageOf(this.state.breed);
         return <Game1 breed={this.state.breed} imgURL={this.state.imgURL} answers={this.state.answers} result={this.state.result} checkAnswer={this.checkAnswer} />
     }
 }
@@ -70,9 +70,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   correctAnswer,
   wrongAnswer,
-  resetAnswer,
-  getRandomImageOf
-};
+  levelUp
+}
 
 export default connect(mapStateToProps,
     mapDispatchToProps)(StartGame1)
