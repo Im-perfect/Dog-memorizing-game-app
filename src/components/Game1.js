@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import superagent from "superagent";
+// import superagent from "superagent";
 import ResultGame1 from "./ResultGame1";
+import {correctAnswer, wrongAnswer, resetAnswer} from '../actions/answers'
+import {getRandomImageOf} from '../actions/breeds'
 
 class Game1 extends React.Component {
   state = {
@@ -14,14 +16,14 @@ class Game1 extends React.Component {
   };
 
   componentDidMount() {
-    superagent
-      .get(`https://dog.ceo/api/breed/${this.state.breed}/images/random`)
-      .then(res =>
-        this.setState({
-          imgURL: res.body.message
-        })
-      )
-      .catch(err => console.log(err));
+    // superagent
+    //   .get(`https://dog.ceo/api/breed/${this.state.breed}/images/random`)
+    //   .then(res =>
+    //     this.setState({
+    //       imgURL: res.body.message
+    //     })
+    //   )
+    //   .catch(err => console.log(err));
 
     this.setState({
       answers: this.getAnswers(this.props.currentBreeds)
@@ -40,6 +42,11 @@ class Game1 extends React.Component {
   };
 
   checkAnswer = answer => {
+    if (answer === this.state.breed) {
+        this.setState({
+            result: true
+        })
+    }
     return answer === this.state.breed ? this.setState({
         result: true
     }):this.setState({
@@ -48,6 +55,9 @@ class Game1 extends React.Component {
   };
 
   render() {
+    console.log(this.state)
+
+    this.props.getRandomImageOf(this.state.breed)
     return (
       <div>
         <h3>Which is the dog breed in the picture?</h3>
@@ -86,6 +96,14 @@ class Game1 extends React.Component {
 const mapStateToProps = state => {
   return {
     currentBreeds: state.currentBreeds
+
   };
 };
-export default connect(mapStateToProps)(Game1);
+
+const mapDispatchToProps = {
+    correctAnswer,
+    wrongAnswer,
+    resetAnswer,
+    getRandomImageOf
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Game1);
