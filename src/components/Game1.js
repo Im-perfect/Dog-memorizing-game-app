@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import superagent from "superagent";
 import ResultGame1 from "./ResultGame1";
-import {correctAnswer, wrongAnswer} from '../actions/answers'
-import {getRandomImageOf} from '../actions/breeds'
+import {correctAnswer, wrongAnswer, levelUp} from '../actions/answers'
 
 class Game1 extends React.Component {
   state = {
@@ -60,9 +59,6 @@ class Game1 extends React.Component {
   };
 
   render() {
-    console.log(this.state)
-
-    this.props.getRandomImageOf(this.state.breed)
     return (
       <div>
         <h3>Which is the dog breed in the picture?</h3>
@@ -108,6 +104,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     correctAnswer,
     wrongAnswer,
-    getRandomImageOf
+    levelUp
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Game1);

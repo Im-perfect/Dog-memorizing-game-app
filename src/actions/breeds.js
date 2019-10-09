@@ -15,20 +15,4 @@ export function getBreeds() {
     }
 }
 
-export const setCurrentImage = (imgUrl) => {
-    return{
-        type:'SET_CURRENT_IMAGE',
-        payload: imgUrl
-    }
-}
-
-export function getRandomImageOf(breed) {
-    return function (dispatch,setState) {
-      request(`https://dog.ceo/api/breed/${breed}/images/random`)
-        .then(response => {
-          dispatch(setCurrentImage(response.body.message))
-        })
-        .catch(err => console.log(err))
-    }
-}
 
