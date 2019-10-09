@@ -8,6 +8,7 @@ state = {
 }
 
   componentDidMount(){
+    console.log('called')
     superagent
       .get(`https://dog.ceo/api/breed/${this.props.breed}/images/random`)
       .then(response => this.setState({
@@ -20,7 +21,7 @@ state = {
 
     return (
       <div>
-          <img onClick={this.props.checkAnswer} src={this.state.imgURL} alt={this.props.breed} key={this.props.breed} alt={this.props.breed} />        
+          <img onClick={this.props.checkAnswer} src={this.state.imgURL} height='150px' />        
       </div >
     )
   }
