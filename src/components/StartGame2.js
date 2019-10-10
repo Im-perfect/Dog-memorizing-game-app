@@ -53,8 +53,8 @@ class StartGame2 extends React.Component {
   }
 
 
-  checkAnswer = (event) => {
-    if (this.state.breed === event.target.alt) {
+  checkAnswer = (option,breed) => {
+    if (breed === option) {
       this.setState({
         question: this.state.question + 1,
         result: true
@@ -70,7 +70,7 @@ class StartGame2 extends React.Component {
       }
       setTimeout(this.startGame, 500)
     }
-    if(this.state.breed !== event.target.alt) {
+    if(this.state.breed !== option) {
       this.setState({
         question: this.state.question + 1,
         result: false
