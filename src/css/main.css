@@ -7,6 +7,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: "Noto Sans", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -57,13 +58,40 @@ body {
 }
 
 .input {
-    height: 24px;
-    width: 200px;
-    background: #fff;
-    color: #b1b1b1;
-    font: inherit;
-    box-shadow: -1px 6px 19px -5px rgba(0,0,0,.1);
-    border: 0;
-    outline: 0;
-    padding: 13px 18px;
+  height: 24px;
+  width: 200px;
+  background: #fff;
+  color: #b1b1b1;
+  font: inherit;
+  box-shadow: -1px 6px 19px -5px rgba(0, 0, 0, 0.1);
+  border: 0;
+  outline: 0;
+  padding: 13px 18px;
+}
+
+#list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  text-transform: capitalize
+}
+
+#list li {
+  flex: 10%;
+  background-color: white;
+  margin: 10px 20px;
+  padding: 10px;
+  border: 1px solid #22a757;
+  transition: box-shadow 0.5s ease;
+}
+
+#list li a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+#list li:hover {
+    box-shadow: -1px 5px 19px -8px rgba(0, 0, 0, 0.27);
+    color: white;
+    background-color: #22a757;    
 }
