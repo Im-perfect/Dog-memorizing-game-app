@@ -2,6 +2,7 @@ import React from "react";
 import ResultGame1 from "./ResultGame1";
 import "../css/choiceButton.css";
 import "../css/main.css"
+import Hint from "./Hint"
 
 class Game1 extends React.Component {
   keyBoardHandler = (event) => {
@@ -33,8 +34,8 @@ class Game1 extends React.Component {
       <div className="game-area">
         <h3>Which is the dog breed in the picture?</h3>
         <img src={this.props.imgURL} alt={this.props.breed} height="250px" />
-
-        <h4>Choose from:</h4>
+        <Hint />
+        {/* <h4>Choose from:</h4> */}
         <div>
           <button
             className="choice-button"

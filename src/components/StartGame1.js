@@ -2,10 +2,18 @@ import React from "react";
 import superagent from "superagent";
 import { connect } from "react-redux";
 
-import Game1 from './Game1'
-import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
-import {addMoreBreeds} from '../actions/breeds'
-import getRandomElements from '../getRandomElements'
+import Game1 from "./Game1";
+import {
+  correctAnswer,
+  wrongAnswer,
+  levelUp,
+  resetAnswers
+} from "../actions/answers";
+import { addMoreBreeds } from "../actions/breeds";
+import { updateSeenBreeds } from "../actions/handleSeenBreeds";
+import { isFirstSeen } from "../actions/isFirstSeen";
+import getRandomElements from "../getRandomElements";
+
 class StartGame1 extends React.Component {
   state = {
     breed: null,
@@ -17,6 +25,12 @@ class StartGame1 extends React.Component {
   startGame = () => {
     const shuffleAnswers = this.getAnswers(this.props.currentBreeds);
     const currentBreed = shuffleAnswers[Math.floor(Math.random() * 3)];
+    if (!this.props.seenBreeds.includes(currentBreed)) {
+      this.props.updateSeenBreeds(currentBreed);
+      this.props.isFirstSeen(true);
+    } else {
+      this.props.isFirstSeen(false);
+    }
 
     superagent
       .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
@@ -32,8 +46,8 @@ class StartGame1 extends React.Component {
   };
 
   componentDidMount() {
-    this.props.resetAnswers() 
-    this.startGame();    
+    this.props.resetAnswers();
+    this.startGame();
   }
 
   getAnswers = currentBreeds => {
@@ -47,25 +61,28 @@ class StartGame1 extends React.Component {
     return newAnswers;
   };
 
-     checkAnswer = answer => {
-       if (answer === this.state.breed) {
-          this.setState({ result: true });
-          this.props.correctAnswer()
-            if(this.props.streaks===1){
-              this.props.levelUp()
-              this.props.addMoreBreeds(getRandomElements(
-                this.props.dogbreeds
-                  .filter(breed => !this.props.currentBreeds.includes(breed))
-                , 3)
-              )
-            }
-          setTimeout(this.startGame, 1000);
-        } else {
-          this.setState({ result: false });
-          this.props.wrongAnswer()
-          setTimeout(this.startGame, 2000);
-        }
-    };
+  checkAnswer = answer => {
+    if (answer === this.state.breed) {
+      this.setState({ result: true });
+      this.props.correctAnswer();
+      if (this.props.streaks === 1) {
+        this.props.levelUp();
+        this.props.addMoreBreeds(
+          getRandomElements(
+            this.props.dogbreeds.filter(
+              breed => !this.props.currentBreeds.includes(breed)
+            ),
+            3
+          )
+        );
+      }
+      setTimeout(this.startGame, 1000);
+    } else {
+      this.setState({ result: false });
+      this.props.wrongAnswer();
+      setTimeout(this.startGame, 2000);
+    }
+  };
 
   render() {
     return (
@@ -84,7 +101,8 @@ const mapStateToProps = state => {
   return {
     dogbreeds: state.dogbreeds,
     currentBreeds: state.currentBreeds,
-    streaks: state.answers.streaks
+    streaks: state.answers.streaks,
+    seenBreeds: state.seenBreeds
   };
 };
 
@@ -93,9 +111,10 @@ const mapDispatchToProps = {
   wrongAnswer,
   levelUp,
   resetAnswers,
-  addMoreBreeds
-}
-
+  addMoreBreeds,
+  updateSeenBreeds,
+  isFirstSeen
+};
 
 export default connect(
   mapStateToProps,
