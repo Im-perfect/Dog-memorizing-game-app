@@ -4,6 +4,26 @@ import "../css/choiceButton.css";
 import "../css/main.css"
 
 class Game1 extends React.Component {
+
+  componentDidMount(){
+    document.body.addEventListener('keypress',
+    (event) => {
+      switch (event.code) {
+        case 'KeyA':
+          this.props.checkAnswer(this.props.answers[0])
+          break
+        case 'KeyS':
+          this.props.checkAnswer(this.props.answers[1])
+          break
+        case 'KeyD':
+          this.props.checkAnswer(this.props.answers[2])
+          break
+        default:
+          break;
+      }
+    })
+  }
+  
   render() {
     return (
       <div className="game-area">
