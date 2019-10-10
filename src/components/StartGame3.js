@@ -72,8 +72,74 @@ class StartGame3 extends React.Component{
       this.props.resetAnswers()
       this.startGame()
     }
+    checkAnswerGame1 = answer => {
+      if (answer === this.state.breed) {
+        this.setState({ result: true });
+        this.props.correctAnswer();
+        if (this.props.streaks === 1) {
+          this.props.levelUp();
+          this.props.addMoreBreeds(
+            getRandomElements(
+              this.props.dogbreeds.filter(
+                breed => !this.props.currentBreeds.includes(breed)
+              ),
+              3
+            )
+          );
+        }
+        setTimeout(this.startGame, 1000);
+      } else {
+        this.setState({ result: false });
+        this.props.wrongAnswer();
+        setTimeout(this.startGame, 2000);
+      }
+    }
+    checkAnswerGame2 = (option,breed) => {
+      if (breed === option) {
+        this.setState({
+          question: this.state.question + 1,
+          result: true
+        })
+        this.props.correctAnswer()
+        if (this.props.streaks === 3) {
+          this.props.levelUp()
+          this.props.addMoreBreeds(getRandomElements(
+            this.props.dogbreeds
+              .filter(breed => !this.props.currentBreeds.includes(breed))
+            , 3)
+          )
+        }
+        setTimeout(this.startGame, 500)
+      }
+      if(this.state.breed !== option) {
+        this.setState({
+          question: this.state.question + 1,
+          result: false
+        })
+        this.props.wrongAnswer()
+        setTimeout(this.startGame, 500)
+      }
+    }
     render(){
-        return 'game3'
+      if (Math.floor(Math.random()*2)===0) {
+        return <Game1
+          breed={this.state.breed}
+          imgURL={this.state.imgURL}
+          answers={this.state.options}
+          result={this.state.result}
+          checkAnswer={this.checkAnswerGame1}
+        />
+      }
+      return <Game2
+        breed={this.state.breed}
+        checkAnswer={this.checkAnswerGame2}
+        imgURL1={this.state.imgURL1}
+        imgURL2={this.state.imgURL2}
+        imgURL3={this.state.imgURL3}
+        question={this.state.question}
+        shuffledCurrentBreeds={this.state.options}
+        result={this.state.result}
+        />
     }
 }
 const mapStateToProps = state => {
