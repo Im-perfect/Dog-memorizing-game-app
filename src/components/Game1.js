@@ -5,24 +5,27 @@ import "../css/main.css"
 import Hint from "./Hint"
 
 class Game1 extends React.Component {
+  keyBoardHandler = (event) => {
+    switch (event.code) {
+      case 'KeyA':
+        this.props.checkAnswer(this.props.answers[0])
+        break
+      case 'KeyS':
+        this.props.checkAnswer(this.props.answers[1])
+        break
+      case 'KeyD':
+        this.props.checkAnswer(this.props.answers[2])
+        break
+      default:
+        break;
+    }
+  }
 
   componentDidMount(){
-    document.body.addEventListener('keypress',
-    (event) => {
-      switch (event.code) {
-        case 'KeyA':
-          this.props.checkAnswer(this.props.answers[0])
-          break
-        case 'KeyS':
-          this.props.checkAnswer(this.props.answers[1])
-          break
-        case 'KeyD':
-          this.props.checkAnswer(this.props.answers[2])
-          break
-        default:
-          break;
-      }
-    })
+    document.body.addEventListener('keypress', this.keyBoardHandler)
+  }
+  componentWillUnmount(){
+    document.body.removeEventListener('keypress', this.keyBoardHandler)
   }
   
   render() {
