@@ -10,6 +10,7 @@ import {connect} from 'react-redux'
 import UserPerformance from "./components/UserPerformance";
 import StartGame2 from "./components/StartGame2";
 import "./css/main.css"
+import UserName from "./components/UserName"
 
 
 class App extends React.Component {
@@ -24,7 +25,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <header></header>
-        <Route path="/" exact component={Startpage}></Route>
+        <Route path="/startpage" component={Startpage}></Route>
+        <Route path="/" exact component={UserName}></Route>
         <Route path="/dog-breeds" exact component={Doglist}></Route>
         <Route path="/dog-breeds/:breed" component={DogDetails}></Route>
         <Route path="/game2" component={UserPerformance}></Route>
