@@ -31,9 +31,7 @@ class Game1 extends React.Component {
   
   removeOneAnswer = () => {
     const rightIndex = this.props.answers.indexOf(this.props.breed);
-    // console.log(rightIndex)
     const wrongIndex = [0,1,2].filter(i => i !== rightIndex)[Math.round(Math.random())]
-    // console.log(wrongIndex)
     const newArray = [...this.props.isDisabled]
     newArray[wrongIndex] = "none" 
     this.props.setIsDisabled(newArray)

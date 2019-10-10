@@ -5,7 +5,7 @@ import Game2 from "./Game2";
 import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
 import {addMoreBreeds} from '../actions/breeds'
 import getRandomElements from '../getRandomElements'
-import { isFirstSeen,updateSeenBreeds,resetFirstSeen } from "../actions/isFirstSeen";
+import { isFirstSeen, updateSeenBreeds, resetFirstSeen } from "../actions/isFirstSeen";
 
 class StartGame2 extends React.Component {
   state = {
@@ -16,12 +16,10 @@ class StartGame2 extends React.Component {
     imgURL3: null,
     shuffledCurrentBreeds: [],
     result: null,
-    isDisabled: ['initial', 'initial' ,'initial'],
+    isDisabled: ['initial', 'initial' ,'initial']
   } 
 
   startGame = () => {
-    // this.resetHint()
-    
     const shuffledCurrentBreeds = [...this.props.currentBreeds].sort(() => 0.5 - Math.random()).slice(0, 3)
     const currentBreed = shuffledCurrentBreeds[Math.floor(Math.random() * shuffledCurrentBreeds.length)]
 
@@ -53,6 +51,7 @@ class StartGame2 extends React.Component {
       .get(`https://dog.ceo/api/breed/${shuffledCurrentBreeds[2]}/images/random`)
       .then(response =>  this.setState({
         imgURL3: response.body.message,
+        isDisabled: ['initial', 'initial' ,'initial']
       }) )
       .catch(err => console.log(err));
   }
@@ -93,15 +92,11 @@ class StartGame2 extends React.Component {
     }
   }
 
-  setIsDisabled=(newArray)=>{
+  setIsDisabled=(array) => {
     this.setState({
-      isDisabled: newArray
+        isDisabled:[...array]
     })
-  }
-
-  resetHint = () =>{
-    this.setState({isDisabled: ['initial', 'initial' ,'initial']})
-  }
+}
 
   render() {
     return (
