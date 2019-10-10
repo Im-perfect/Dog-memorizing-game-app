@@ -25,6 +25,7 @@ class Game1 extends React.Component {
   }
   
   render() {
+
     return (
       <div className="game-area">
         <h3>Which is the dog breed in the picture?</h3>
