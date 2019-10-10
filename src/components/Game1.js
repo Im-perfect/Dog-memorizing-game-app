@@ -3,7 +3,7 @@ import ResultGame1 from "./ResultGame1";
 class Game1 extends React.Component {
 
   render() {
-    return (
+    return ( 
       <div>
         <h3>Which is the dog breed in the picture?</h3>
         <img src={this.props.imgURL} alt={this.props.breed} height="250px" />

@@ -2,6 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import superagent from "superagent";
 import Game2 from "./Game2";
+import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
+import {addMoreBreeds} from '../actions/breeds'
+import getRandomElements from '../getRandomElements'
 
 class StartGame2 extends React.Component {
   state = {
@@ -45,6 +48,7 @@ class StartGame2 extends React.Component {
   }
 
   componentDidMount() {
+    this.props.resetAnswers()
     this.startGame()
   }
 
@@ -55,13 +59,23 @@ class StartGame2 extends React.Component {
         question: this.state.question + 1,
         result: true
       })
+      this.props.correctAnswer()
+      if (this.props.streaks === 3) {
+        this.props.levelUp()
+        this.props.addMoreBreeds(getRandomElements(
+          this.props.dogbreeds
+            .filter(breed => !this.props.currentBreeds.includes(breed))
+          , 3)
+        )
+      }
       setTimeout(this.startGame, 500)
     }
-    if (this.state.breed !== event.target.alt) {
+    if(this.state.breed !== event.target.alt) {
       this.setState({
         question: this.state.question + 1,
         result: false
       })
+      this.props.wrongAnswer()
       setTimeout(this.startGame, 500)
     }
   }
@@ -90,7 +104,17 @@ class StartGame2 extends React.Component {
 const mapStateToProps = state => {
   return {
     currentBreeds: state.currentBreeds,
+    dogbreeds: state.dogbreeds,
+    streaks: state.answers.streaks
   };
 };
 
-export default connect(mapStateToProps)(StartGame2)
+const mapDispatchToProps = {
+  correctAnswer,
+  wrongAnswer,
+  levelUp,
+  resetAnswers,
+  addMoreBreeds
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StartGame2)
