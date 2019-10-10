@@ -8,7 +8,7 @@ class Header extends React.Component {
      
       const{dogLoveLevel, allrightAnswers, alltotalAnswers} = this.props.answers
         return(
-            <div className = 'Header'>
+            <div className = 'header'>
                 <h2>User: {this.props.userName}</h2>
                 <h3>You are a {dogLoveLevel}!</h3>
                 <h3>Points total: {allrightAnswers} </h3>

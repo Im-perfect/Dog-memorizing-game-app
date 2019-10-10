@@ -15,8 +15,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-main {
-  display: flex;
+
+.header{
+    border-bottom: solid 1px #b1b1b1
+}
+
+#info {
+    color: #6e6e6e;
+    margin: 80px auto 40px
 }
 
 .game-area {
