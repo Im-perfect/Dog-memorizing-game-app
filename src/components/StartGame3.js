@@ -66,7 +66,8 @@ class StartGame3 extends React.Component{
         .then(response =>  this.setState({
           imgURL3: response.body.message,
         }))
-        .catch(err => console.log(err));    
+        .catch(err => console.log(err)); 
+      this.setState({result:null})   
     }
     componentDidMount(){
       this.props.resetAnswers()
