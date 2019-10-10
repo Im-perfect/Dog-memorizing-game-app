@@ -12,19 +12,19 @@ class Hint extends React.Component {
           <p>
             First time seen
             <span>
-              <button onClick={this.handleClick}>Hint?</button>
+              <button onClick={this.handleClick}>Remove one wrong answer?</button>
             </span>
           </p>
         </div>
       );
     }
-    return "";
+    return null;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    isFirstSeen: state.isFirstSeen
+    isFirstSeen: state.firstSeen.isFirstSeen
   };
 };
 

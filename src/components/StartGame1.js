@@ -10,8 +10,7 @@ import {
   resetAnswers
 } from "../actions/answers";
 import { addMoreBreeds } from "../actions/breeds";
-import { updateSeenBreeds } from "../actions/handleSeenBreeds";
-import { isFirstSeen } from "../actions/isFirstSeen";
+import { isFirstSeen, updateSeenBreeds, resetFirstSeen } from "../actions/isFirstSeen";
 import getRandomElements from "../getRandomElements";
 
 class StartGame1 extends React.Component {
@@ -19,12 +18,14 @@ class StartGame1 extends React.Component {
     breed: null,
     imgURL: null,
     answers: [],
-    result: null
+    result: null,
+    isDisabled: ['initial', 'initial' ,'initial']
   };
 
   startGame = () => {
     const shuffleAnswers = this.getAnswers(this.props.currentBreeds);
     const currentBreed = shuffleAnswers[Math.floor(Math.random() * 3)];
+
     if (!this.props.seenBreeds.includes(currentBreed)) {
       this.props.updateSeenBreeds(currentBreed);
       this.props.isFirstSeen(true);
@@ -48,6 +49,10 @@ class StartGame1 extends React.Component {
   componentDidMount() {
     this.props.resetAnswers();
     this.startGame();
+  }
+
+  componentWillUnmount() {
+    this.props.resetFirstSeen();
   }
 
   getAnswers = currentBreeds => {
@@ -92,6 +97,7 @@ class StartGame1 extends React.Component {
         answers={this.state.answers}
         result={this.state.result}
         checkAnswer={this.checkAnswer}
+        isDisabled={this.state.isDisabled}
       />
     );
   }
@@ -102,7 +108,7 @@ const mapStateToProps = state => {
     dogbreeds: state.dogbreeds,
     currentBreeds: state.currentBreeds,
     streaks: state.answers.streaks,
-    seenBreeds: state.seenBreeds
+    seenBreeds: state.firstSeen.seenBreeds
   };
 };
 
@@ -113,7 +119,8 @@ const mapDispatchToProps = {
   resetAnswers,
   addMoreBreeds,
   updateSeenBreeds,
-  isFirstSeen
+  isFirstSeen,
+  resetFirstSeen
 };
 
 export default connect(
