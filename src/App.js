@@ -9,6 +9,7 @@ import StartGame1 from './components/StartGame1'
 import {connect} from 'react-redux'
 import UserPerformance from "./components/UserPerformance";
 import StartGame2 from "./components/StartGame2";
+import "./css/main.css"
 
 
 class App extends React.Component {
