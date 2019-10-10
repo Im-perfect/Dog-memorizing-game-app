@@ -40,7 +40,8 @@ class StartGame1 extends React.Component {
           imgURL: res.body.message,
           answers: shuffleAnswers,
           breed: currentBreed,
-          result: null
+          result: null,
+          isDisabled: ['initial', 'initial' ,'initial']
         })
       )
       .catch(err => console.log(err));
@@ -89,6 +90,12 @@ class StartGame1 extends React.Component {
     }
   };
 
+  setIsDisabled=(array) => {
+      this.setState({
+          isDisabled:[...array]
+      })
+  }
+
   render() {
     return (
       <Game1
@@ -98,6 +105,7 @@ class StartGame1 extends React.Component {
         result={this.state.result}
         checkAnswer={this.checkAnswer}
         isDisabled={this.state.isDisabled}
+        setIsDisabled={this.setIsDisabled}
       />
     );
   }

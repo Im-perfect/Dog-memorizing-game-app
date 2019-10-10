@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 class Hint extends React.Component {
   handleClick = () => {
-      
+      this.props.removeOneAnswer()
   };
   render() {
     if (this.props.isFirstSeen) {
