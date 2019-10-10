@@ -46,3 +46,7 @@
     background-color:black;
     border: black;
 }
+
+.choice-button.primary.narrow {
+    width: 80px
+}

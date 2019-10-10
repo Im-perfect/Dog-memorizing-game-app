@@ -55,3 +55,15 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.input {
+    height: 24px;
+    width: 200px;
+    background: #fff;
+    color: #b1b1b1;
+    font: inherit;
+    box-shadow: -1px 6px 19px -5px rgba(0,0,0,.1);
+    border: 0;
+    outline: 0;
+    padding: 13px 18px;
+}
