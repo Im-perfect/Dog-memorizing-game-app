@@ -1,53 +1,64 @@
-import React from 'react'
-import superagent from 'superagent'
+import React from "react";
+import superagent from "superagent";
 import { connect } from "react-redux";
+
 import Game1 from './Game1'
-import {correctAnswer, wrongAnswer, levelUp} from '../actions/answers'
-
+import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
+import {addMoreBreeds} from '../actions/breeds'
+import getRandomElements from '../getRandomElements'
 class StartGame1 extends React.Component {
-    state = {
-        breed: null,
-        imgURL: null,
-        answers: [],
-        result: null
-      };
+  state = {
+    breed: null,
+    imgURL: null,
+    answers: [],
+    result: null
+  };
 
-    startGame = () => {
-        const currentBreed = this.props.currentBreeds[
-          Math.floor(Math.random() * this.props.currentBreeds.length)
-        ];
-        superagent
-          .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
-          .then(res =>
-            this.setState({
-              imgURL: res.body.message,
-              breed: currentBreed,
-              answers: this.getAnswers(this.props.currentBreeds),
-              result: null
-            })
-          )
-          .catch(err => console.log(err));
-      };
+  startGame = () => {
+    const shuffleAnswers = this.getAnswers(this.props.currentBreeds);
+    const currentBreed = shuffleAnswers[Math.floor(Math.random() * 3)];
 
-    componentDidMount(){
-        this.startGame()
+    superagent
+      .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
+      .then(res =>
+        this.setState({
+          imgURL: res.body.message,
+          answers: shuffleAnswers,
+          breed: currentBreed,
+          result: null
+        })
+      )
+      .catch(err => console.log(err));
+  };
+
+  componentDidMount() {
+    this.props.resetAnswers() 
+    this.startGame();    
+  }
+
+  getAnswers = currentBreeds => {
+    const newAnswers = [];
+    const popCurrentBreeds = [...currentBreeds];
+    for (let i = 0; i < 3; i++) {
+      const random = Math.floor(Math.random() * popCurrentBreeds.length);
+      newAnswers.push(popCurrentBreeds[random]);
+      popCurrentBreeds.splice(random, 1);
     }
+    return newAnswers;
+  };
 
-    getAnswers = currentBreeds => {
-        const newAnswers = [];
-        const popCurrentBreeds = [...currentBreeds];
-        for (let i = 0; i < 3; i++) {
-          const random = Math.floor(Math.random() * popCurrentBreeds.length);
-          newAnswers.push(popCurrentBreeds[random]);
-          popCurrentBreeds.splice(random, 1);
-        }
-        return newAnswers;
-      };
-
-      checkAnswer = answer => {
-        if (answer === this.state.breed) {
+     checkAnswer = answer => {
+       if (answer === this.state.breed) {
           this.setState({ result: true });
           this.props.correctAnswer()
+            if(this.props.streaks===1){
+              this.props.levelUp()
+              this.props.addMoreBreeds(getRandomElements(
+                this.props.dogbreeds
+                  .filter(breed => !this.props.currentBreeds.includes(breed))
+                , 3)
+              )
+            }
           setTimeout(this.startGame, 1000);
         } else {
           this.setState({ result: false });
@@ -56,22 +67,37 @@ class StartGame1 extends React.Component {
         }
     };
 
-    render () {
-        return <Game1 breed={this.state.breed} imgURL={this.state.imgURL} answers={this.state.answers} result={this.state.result} checkAnswer={this.checkAnswer} />
-    }
+  render() {
+    return (
+      <Game1
+        breed={this.state.breed}
+        imgURL={this.state.imgURL}
+        answers={this.state.answers}
+        result={this.state.result}
+        checkAnswer={this.checkAnswer}
+      />
+    );
+  }
 }
 
 const mapStateToProps = state => {
   return {
-    currentBreeds: state.currentBreeds
+    dogbreeds: state.dogbreeds,
+    currentBreeds: state.currentBreeds,
+    streaks: state.answers.streaks
   };
 };
 
 const mapDispatchToProps = {
   correctAnswer,
   wrongAnswer,
-  levelUp
+  levelUp,
+  resetAnswers,
+  addMoreBreeds
 }
 
-export default connect(mapStateToProps,
-    mapDispatchToProps)(StartGame1)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(StartGame1);

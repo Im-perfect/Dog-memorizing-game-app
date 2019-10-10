@@ -15,3 +15,9 @@ export const levelUp = () => {
         type: 'LEVEL_UP'
     }
 }
+
+export const resetAnswers = () => {
+    return {
+        type: 'RESET_ANSWERS'
+    }
+}

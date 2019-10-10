@@ -2,7 +2,7 @@ const initialState = {
   rightAnswers: 0,
   totalAnswers: 0,
   streaks: 0,
-  level: 0
+  level: 1
 }
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
@@ -23,6 +23,8 @@ const reducer = (state = initialState, action = {}) => {
           streaks: 0,
           level: state.level +1
         }
+      case 'RESET_ANSWERS':
+        return initialState
       default:
         return state;
     }

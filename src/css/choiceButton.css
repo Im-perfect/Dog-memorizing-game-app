@@ -1,0 +1,43 @@
+.choice-button{
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    white-space: normal;
+    border: 1px solid #22a757;
+    width: 210px;
+    height: 50px;
+    margin: 0 10px 30px;
+    box-shadow: -1px 6px 19px -5px rgba(0,0,0,.27);
+    transition: box-shadow .2s;
+    position: relative;
+    padding: 10px 16px;
+    line-height: 1.33;
+    border-radius: 6px;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+.choice-button.primary {
+    background-color: #22a757;
+    color:#fff;
+    width: 150px;
+    margin: 0 10px 15px;
+}
+
+.choice-button.primary a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.choice-button:hover{
+    box-shadow: none
+}
+
+.choice-button.primary:hover{
+    box-shadow: none;
+    background-color: #1c8a48;
+    transition: background-color .2s
+}
