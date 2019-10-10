@@ -33,7 +33,7 @@ class StartGame1 extends React.Component {
 
   componentDidMount() {
     this.props.resetAnswers() 
-    this.startGame();
+    this.startGame();    
   }
 
   getAnswers = currentBreeds => {

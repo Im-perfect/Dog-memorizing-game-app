@@ -2,7 +2,7 @@ const initialState = {
   rightAnswers: 0,
   totalAnswers: 0,
   streaks: 0,
-  level: 0
+  level: 1
 }
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
