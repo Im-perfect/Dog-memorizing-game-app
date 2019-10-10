@@ -7,7 +7,8 @@ import {
   correctAnswer,
   wrongAnswer,
   levelUp,
-  resetAnswers
+  resetAnswers,
+  dogLoveLevelUp,
 } from "../actions/answers";
 import { addMoreBreeds } from "../actions/breeds";
 import { updateSeenBreeds } from "../actions/handleSeenBreeds";
@@ -19,7 +20,8 @@ class StartGame1 extends React.Component {
     breed: null,
     imgURL: null,
     answers: [],
-    result: null
+    result: null,
+    question: 1
   };
 
   startGame = () => {
@@ -63,7 +65,10 @@ class StartGame1 extends React.Component {
 
   checkAnswer = answer => {
     if (answer === this.state.breed) {
-      this.setState({ result: true });
+      this.setState({ 
+        result: true,
+        question: this.state.question + 1 
+      });
       this.props.correctAnswer();
       if (this.props.streaks === 1) {
         this.props.levelUp();
@@ -76,9 +81,21 @@ class StartGame1 extends React.Component {
           )
         );
       }
+      if(this.props.answers.allrightAnswers > 2){
+        this.props.dogLoveLevelUp('small dog lover')
+      }
+      if(this.props.answers.allrightAnswers > 4){
+        this.props.dogLoveLevelUp('big dog lover')
+      }
+      if(this.props.answers.allrightAnswers > 6){
+        this.props.dogLoveLevelUp('dog whisperer')
+      }
       setTimeout(this.startGame, 1000);
     } else {
-      this.setState({ result: false });
+      this.setState({ 
+        result: false,
+        question: this.state.question + 1 
+      });
       this.props.wrongAnswer();
       setTimeout(this.startGame, 2000);
     }
@@ -92,6 +109,7 @@ class StartGame1 extends React.Component {
         answers={this.state.answers}
         result={this.state.result}
         checkAnswer={this.checkAnswer}
+        question={this.state.question}
       />
     );
   }
@@ -102,7 +120,8 @@ const mapStateToProps = state => {
     dogbreeds: state.dogbreeds,
     currentBreeds: state.currentBreeds,
     streaks: state.answers.streaks,
-    seenBreeds: state.seenBreeds
+    seenBreeds: state.seenBreeds,
+    answers: state.answers,
   };
 };
 
@@ -113,7 +132,8 @@ const mapDispatchToProps = {
   resetAnswers,
   addMoreBreeds,
   updateSeenBreeds,
-  isFirstSeen
+  isFirstSeen,
+  dogLoveLevelUp
 };
 
 export default connect(
