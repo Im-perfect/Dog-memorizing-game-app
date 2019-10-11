@@ -29,7 +29,9 @@ class Startpage extends React.Component {
             <button className='choice-button primary' onClick={this.handleClick}>
               <Link to="/game2">Game 2</Link>
             </button>
-            <button className='choice-button primary' >Game 3</button>
+            <button className='choice-button primary' onClick={this.handleClick}>
+            <Link to="/game3">Game 3</Link>
+            </button>
         </main>
           <p>Checkout pictures of dog breeds by pressing the list button</p>
           <p>Play the games to improve your dog knowledge</p>

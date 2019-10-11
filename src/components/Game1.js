@@ -41,6 +41,7 @@ class Game1 extends React.Component {
 
     return (
       <div className="game-area">
+        <h2>Question {this.props.question}</h2>
         <h3>Which is the dog breed in the picture?</h3>
         <img src={this.props.imgURL} alt={this.props.breed} height="250px" />
         <Hint removeOneAnswer={this.removeOneAnswer} />

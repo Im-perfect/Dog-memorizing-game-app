@@ -11,6 +11,8 @@ import UserPerformance from "./components/UserPerformance";
 import StartGame2 from "./components/StartGame2";
 import "./css/main.css"
 import UserName from "./components/UserName"
+import StartGame3 from "./components/StartGame3";
+
 
 
 class App extends React.Component {
@@ -32,7 +34,10 @@ class App extends React.Component {
         <Route path="/game2" component={UserPerformance}></Route>
         <Route path="/game2" component={StartGame2}></Route>
         <Route path="/game1" component={UserPerformance}></Route>
-        <Route path="/game1" component={StartGame1}></Route>
+        <Route path="/game1" component={StartGame1}></Route>       
+        <Route path="/game3" component={UserPerformance}></Route>
+        <Route path="/game3" component={StartGame3}></Route>
+        
 
       </div>
     );
