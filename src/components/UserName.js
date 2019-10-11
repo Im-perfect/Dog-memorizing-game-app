@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {addName} from '../actions/addName'
 import { connect } from 'react-redux'
 
-
 class UserName extends Component {
   state = {
     name: ""
@@ -19,13 +18,14 @@ class UserName extends Component {
     this.props.addName(this.state.name)
     this.props.history.push("/startpage")
   }
+  
   render(){
     return(
       <div>
         <h1>Username</h1>
         <form onSubmit={this.handleSubmit}>
-          <input type='text' onChange={this.handleChange} value={this.state.name}/>
-          <button>Go!</button>
+          <input className="input" type='text' placeholder="Your name" onChange={this.handleChange} value={this.state.name} />
+          <button className="choice-button primary narrow">Go!</button>
         </form>
       </div>
     )

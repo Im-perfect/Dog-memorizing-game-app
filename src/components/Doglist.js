@@ -9,6 +9,7 @@ function searchingFor(term){
 }
 
 class Doglist extends React.Component {
+
   state = {
     term: ""
   }
@@ -26,17 +27,12 @@ class Doglist extends React.Component {
         <input type="text" placeholder='Search dogs..'onChange={this.searchHandler} value={this.state.term} />
         </form>
 
-        <ul id='doglist'>
+        <ul id='list'>
           {this.props.dogbreeds.filter(searchingFor(this.state.term)).map(breed => {
             return <li key={breed}><Link to={`/dog-breeds/${breed}`}>{breed}</Link></li>
           })}
         </ul>
-
-
-
-
-
-      </div>)
+     </div>)
     }
   }
 

@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald&display=swap');
+
 .choice-button{
     background-color: #fff;
     color: #000;
     font-size: 16px;
     white-space: normal;
     border: 1px solid #22a757;
-    width: 210px;
+    width: 180px;
     height: 50px;
     margin: 0 10px 30px;
     box-shadow: -1px 6px 19px -5px rgba(0,0,0,.27);
@@ -22,11 +24,9 @@
     color:#fff;
     width: 150px;
     margin: 0 10px 15px;
-}
-
-.choice-button.primary a {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
     text-decoration: none;
-    color: #fff;
     text-transform: uppercase;
     font-weight: 800;
     cursor: pointer;
@@ -40,4 +40,13 @@
     box-shadow: none;
     background-color: #1c8a48;
     transition: background-color .2s
+}
+
+.choice-button.primary.coral {
+    background-color:black;
+    border: black;
+}
+
+.choice-button.primary.narrow {
+    width: 80px
 }
