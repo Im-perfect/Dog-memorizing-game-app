@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {addName} from '../actions/addName'
 import { connect } from 'react-redux'
+import {addName} from '../actions/addName'
 
 class UserName extends Component {
   state = {
@@ -21,7 +21,7 @@ class UserName extends Component {
   
   render(){
     return(
-      <div>
+      <div id="user-name">
         <h1>Username</h1>
         <form onSubmit={this.handleSubmit}>
           <input className="input" type='text' placeholder="Your name" onChange={this.handleChange} value={this.state.name} />

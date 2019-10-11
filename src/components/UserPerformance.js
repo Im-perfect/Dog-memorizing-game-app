@@ -12,7 +12,7 @@ class UserPerformance extends React.Component {
         <ul id='performance'>
           <li>Points: {rightAnswers}</li>
           <li>Success:{" "}{totalAnswers === 0 ? 0
-              : ((rightAnswers / totalAnswers) * 100).toFixed(0)}%</li>
+              : ((rightAnswers / (totalAnswers)) * 100).toFixed(0)}%</li>
           <li>Level: {level}</li>
           <li>Next level: Score {5 - streaks} points in a row</li>    
           <li>Dogbreeds:{this.props.currentBreeds.length}</li>

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import superagent from "superagent";
 import getRandomElements from "../getRandomElements";
 
@@ -21,6 +22,11 @@ export default class DogDetails extends React.Component {
     return (
       <div>
         <h1 className="title">{this.props.match.params.breed}</h1>
+        <Link to ='/dog-breeds'>
+          <button className = 'choice-button primary narrow'>
+            Back
+          </button>
+        </Link>
         <div id="imageContainer">
           {images
             ? getRandomElements(images, 10).map(image => (
@@ -32,6 +38,11 @@ export default class DogDetails extends React.Component {
               ))
             : "Loading..."}
         </div>
+        <Link to ='/dog-breeds'>
+          <button className = 'choice-button primary'>
+            Back
+          </button>
+        </Link>
       </div>
     );
   }
