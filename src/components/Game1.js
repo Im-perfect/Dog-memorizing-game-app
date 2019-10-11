@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import ResultGame1 from "./ResultGame1";
 import "../css/choiceButton.css";
 import "../css/main.css"
@@ -41,6 +42,11 @@ class Game1 extends React.Component {
 
     return (
       <div className="game-area">
+        <Link to ='/startpage'>
+          <button className = 'choice-button primary'>
+            Back
+          </button>
+        </Link>
         <h2>Question {this.props.question}</h2>
         <h3>Which is the dog breed in the picture?</h3>
         <img src={this.props.imgURL} alt={this.props.breed} height="250px" />

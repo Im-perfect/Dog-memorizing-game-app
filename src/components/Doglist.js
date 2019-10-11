@@ -22,6 +22,11 @@ class Doglist extends React.Component {
     render() {    
       return (<div>
         <h1>Dogbreeds</h1>
+        <Link to ='/startpage'>
+          <button className = 'choice-button primary'>
+            Back
+          </button>
+        </Link>
 
         <form id='search-dogs'>
         <input type="text" placeholder='Search dogs..'onChange={this.searchHandler} value={this.state.term} />
@@ -32,6 +37,11 @@ class Doglist extends React.Component {
             return <li key={breed}><Link to={`/dog-breeds/${breed}`}>{breed}</Link></li>
           })}
         </ul>
+        <Link to ='/startpage'>
+          <button className = 'choice-button primary'>
+            Back
+          </button>
+        </Link>
      </div>)
     }
   }
