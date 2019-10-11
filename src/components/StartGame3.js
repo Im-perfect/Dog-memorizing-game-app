@@ -26,7 +26,7 @@ class StartGame3 extends React.Component{
         imgURL3: null,
         result: null,
         isDisabled: ['initial', 'initial' ,'initial'],
-        whichGame: Math.round(Math.random())
+        whichGame: 0
     }
     startGame = (whichGame) => {
       const game = whichGame
@@ -49,7 +49,7 @@ class StartGame3 extends React.Component{
         this.props.isFirstSeen(false);
       }
 
-      if(!this.state.whichGame) {
+      if(!game) {
         superagent
         .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
         .then(res =>
