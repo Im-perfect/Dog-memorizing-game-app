@@ -52,12 +52,19 @@ body {
 
 #info {
   color: #6e6e6e;
-  margin: 80px auto 40px;
+  margin: 120px auto 40px;
 }
 
 .game-area {
-  margin: 50px;
+  margin: 20px;
   padding: 0 50px 30px;
+}
+
+.game-area h2 {
+    text-transform: capitalize;
+    border-bottom: solid 5px #22a757;
+    display: inline-block;
+    padding: 5px;
 }
 
 #performance {
@@ -145,4 +152,9 @@ body {
   height: 250px;
   margin: 20px;
   box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.4);
+}
+
+#hint p {
+    color: #6e6e6e;
+    font-size: 14px;
 }
