@@ -41,16 +41,15 @@ class Game1 extends React.Component {
   render() {
 
     return (
-      <div className="game-area">
+      <div className="game-area"> 
         <Link to ='/startpage'>
           <button className = 'choice-button primary'>
             Back
           </button>
         </Link>
         <h2>Question {this.props.question}</h2>
-        <h3>Which is the dog breed in the picture?</h3>
-        <img src={this.props.imgURL} alt={this.props.breed} height="250px" />
-        <Hint removeOneAnswer={this.removeOneAnswer} />
+        <h3>Name the breed of the dog in the picture</h3>
+        <img src={this.props.imgURL} alt={this.props.breed} height="200px" />
 
         <div>
           <button
@@ -75,6 +74,9 @@ class Game1 extends React.Component {
             {this.props.answers[2]}
           </button>
         </div>
+        
+        <Hint removeOneAnswer={this.removeOneAnswer} />
+
         <ResultGame1 result={this.props.result} breed={this.props.breed} />
       </div>
     );

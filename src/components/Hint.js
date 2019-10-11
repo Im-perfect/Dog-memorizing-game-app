@@ -8,11 +8,11 @@ class Hint extends React.Component {
   render() {
     if (this.props.isFirstSeen) {
       return (
-        <div>
+        <div id="hint">
           <p>
-            First time seen
+            See this breed for the first time? 
             <span>
-              <button onClick={this.handleClick}>Remove one wrong answer?</button>
+              <button className="choice-button primary narrow long" onClick={this.handleClick}>Remove one wrong answer?</button>
             </span>
           </p>
         </div>
