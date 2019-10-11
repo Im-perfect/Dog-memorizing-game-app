@@ -7,6 +7,8 @@ body {
   margin: 0;
   font-family: "Noto Sans", sans-serif;
   box-sizing: border-box;
+  background-image: url("../paws.png");
+  background-size: cover;
 }
 
 #root {
@@ -28,6 +30,24 @@ body {
 
 .header {
   border-bottom: solid 1px #b1b1b1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center
+}
+
+.header h1 {
+    color: #22a757;
+    font-family: 'Oswald', sans-serif;
+    text-transform: capitalize
+}
+
+.header .header-status {
+    display: flex;
+    flex-direction: column
+}
+
+.header .header-status p {
+   margin: 5px 0
 }
 
 #info {
@@ -38,7 +58,6 @@ body {
 .game-area {
   margin: 50px;
   padding: 0 50px 30px;
-  background-color: rgba(255, 255, 255, 0.9);
 }
 
 #performance {
