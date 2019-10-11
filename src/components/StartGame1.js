@@ -11,8 +11,7 @@ import {
   dogLoveLevelUp,
 } from "../actions/answers";
 import { addMoreBreeds } from "../actions/breeds";
-import { updateSeenBreeds } from "../actions/handleSeenBreeds";
-import { isFirstSeen } from "../actions/isFirstSeen";
+import { isFirstSeen, updateSeenBreeds, resetFirstSeen } from "../actions/isFirstSeen";
 import getRandomElements from "../getRandomElements";
 
 class StartGame1 extends React.Component {
@@ -21,12 +20,14 @@ class StartGame1 extends React.Component {
     imgURL: null,
     answers: [],
     result: null,
+    isDisabled: ['initial', 'initial' ,'initial'],
     question: 1
   };
 
   startGame = () => {
     const shuffleAnswers = this.getAnswers(this.props.currentBreeds);
     const currentBreed = shuffleAnswers[Math.floor(Math.random() * 3)];
+
     if (!this.props.seenBreeds.includes(currentBreed)) {
       this.props.updateSeenBreeds(currentBreed);
       this.props.isFirstSeen(true);
@@ -41,7 +42,8 @@ class StartGame1 extends React.Component {
           imgURL: res.body.message,
           answers: shuffleAnswers,
           breed: currentBreed,
-          result: null
+          result: null,
+          isDisabled: ['initial', 'initial' ,'initial']
         })
       )
       .catch(err => console.log(err));
@@ -50,6 +52,10 @@ class StartGame1 extends React.Component {
   componentDidMount() {
     this.props.resetAnswers();
     this.startGame();
+  }
+
+  componentWillUnmount() {
+    this.props.resetFirstSeen();
   }
 
   getAnswers = currentBreeds => {
@@ -101,6 +107,12 @@ class StartGame1 extends React.Component {
     }
   };
 
+  setIsDisabled=(array) => {
+      this.setState({
+          isDisabled:[...array]
+      })
+  }
+
   render() {
     return (
       <Game1
@@ -109,6 +121,8 @@ class StartGame1 extends React.Component {
         answers={this.state.answers}
         result={this.state.result}
         checkAnswer={this.checkAnswer}
+        isDisabled={this.state.isDisabled}
+        setIsDisabled={this.setIsDisabled}
         question={this.state.question}
       />
     );
@@ -120,7 +134,7 @@ const mapStateToProps = state => {
     dogbreeds: state.dogbreeds,
     currentBreeds: state.currentBreeds,
     streaks: state.answers.streaks,
-    seenBreeds: state.seenBreeds,
+    seenBreeds: state.firstSeen.seenBreeds,
     answers: state.answers,
   };
 };
@@ -133,6 +147,7 @@ const mapDispatchToProps = {
   addMoreBreeds,
   updateSeenBreeds,
   isFirstSeen,
+  resetFirstSeen,
   dogLoveLevelUp
 };
 

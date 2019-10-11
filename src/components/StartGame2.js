@@ -5,6 +5,7 @@ import Game2 from "./Game2";
 import {correctAnswer, wrongAnswer, levelUp, resetAnswers} from '../actions/answers'
 import {addMoreBreeds} from '../actions/breeds'
 import getRandomElements from '../getRandomElements'
+import { isFirstSeen, updateSeenBreeds, resetFirstSeen } from "../actions/isFirstSeen";
 
 class StartGame2 extends React.Component {
   state = {
@@ -15,13 +16,20 @@ class StartGame2 extends React.Component {
     imgURL3: null,
     shuffledCurrentBreeds: [],
     result: null,
+    isDisabled: ['initial', 'initial' ,'initial']
   } 
-
 
   startGame = () => {
     const shuffledCurrentBreeds = [...this.props.currentBreeds].sort(() => 0.5 - Math.random()).slice(0, 3)
     const currentBreed = shuffledCurrentBreeds[Math.floor(Math.random() * shuffledCurrentBreeds.length)]
-  
+
+    if (!this.props.seenBreeds.includes(currentBreed)) {
+      this.props.updateSeenBreeds(currentBreed);
+      this.props.isFirstSeen(true);
+    } else {
+      this.props.isFirstSeen(false);
+    }
+
     superagent
       .get(`https://dog.ceo/api/breed/${shuffledCurrentBreeds[0]}/images/random`)
       .then(response =>  this.setState({
@@ -43,6 +51,7 @@ class StartGame2 extends React.Component {
       .get(`https://dog.ceo/api/breed/${shuffledCurrentBreeds[2]}/images/random`)
       .then(response =>  this.setState({
         imgURL3: response.body.message,
+        isDisabled: ['initial', 'initial' ,'initial']
       }) )
       .catch(err => console.log(err));
   }
@@ -52,6 +61,9 @@ class StartGame2 extends React.Component {
     this.startGame()
   }
 
+  componentWillUnmount() {
+    this.props.resetFirstSeen();
+  }
 
   checkAnswer = (option,breed) => {
     if (breed === option) {
@@ -68,7 +80,7 @@ class StartGame2 extends React.Component {
           , 3)
         )
       }
-      setTimeout(this.startGame, 500)
+      setTimeout(this.startGame, 2000)
     }
     if(this.state.breed !== option) {
       this.setState({
@@ -76,11 +88,15 @@ class StartGame2 extends React.Component {
         result: false
       })
       this.props.wrongAnswer()
-      setTimeout(this.startGame, 500)
+      setTimeout(this.startGame, 2000)
     }
   }
 
-
+  setIsDisabled=(array) => {
+    this.setState({
+        isDisabled:[...array]
+    })
+}
 
   render() {
     return (
@@ -94,6 +110,8 @@ class StartGame2 extends React.Component {
         question={this.state.question}
         shuffledCurrentBreeds={this.state.shuffledCurrentBreeds}
         result={this.state.result}
+        isDisabled={this.state.isDisabled}
+        setIsDisabled={this.setIsDisabled}
         />
       </div >
 
@@ -105,7 +123,8 @@ const mapStateToProps = state => {
   return {
     currentBreeds: state.currentBreeds,
     dogbreeds: state.dogbreeds,
-    streaks: state.answers.streaks
+    streaks: state.answers.streaks,
+    seenBreeds: state.firstSeen.seenBreeds
   };
 };
 
@@ -114,7 +133,10 @@ const mapDispatchToProps = {
   wrongAnswer,
   levelUp,
   resetAnswers,
-  addMoreBreeds
+  addMoreBreeds,
+  updateSeenBreeds,
+  isFirstSeen,
+  resetFirstSeen
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartGame2)
