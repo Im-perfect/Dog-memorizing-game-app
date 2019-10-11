@@ -110,7 +110,7 @@ class StartGame3 extends React.Component{
             , 3)
           )
         }
-        setTimeout(this.startGame, 500)
+        setTimeout(this.startGame, 1000)
       }
       if(this.state.breed !== option) {
         this.setState({
@@ -118,7 +118,7 @@ class StartGame3 extends React.Component{
           result: false
         })
         this.props.wrongAnswer()
-        setTimeout(this.startGame, 500)
+        setTimeout(this.startGame, 2000)
       }
     }
     render(){
