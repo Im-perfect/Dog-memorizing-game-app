@@ -21,10 +21,10 @@ class Doglist extends React.Component {
   }
     render() {    
       return (<div>
-        <h1>Dogbreeds</h1>
+        <h1 className="title">Dogbreeds</h1>
 
         <form id='search-dogs'>
-        <input type="text" placeholder='Search dogs..'onChange={this.searchHandler} value={this.state.term} />
+            <input type="text" placeholder='Search dogs..'onChange={this.searchHandler} value={this.state.term} className="input" />
         </form>
 
         <ul id='list'>

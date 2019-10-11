@@ -3,33 +3,86 @@
 html,
 body {
   height: 100%;
-  width: 100%;
   padding: 0;
   margin: 0;
   font-family: "Noto Sans", sans-serif;
   box-sizing: border-box;
+  background-image: url("../paws.png");
+  background-size: cover;
 }
 
-body {
-  background-image: url("https://embarkvet.com/wp-content/uploads/2018/09/embark-dognames-1.jpg");
+#root {
+  height: 100%;
+}
+
+.App {
+  height: inherit;
+}
+
+#user-name {
+  padding-top: 100px;
+  height: inherit;
+  background-image: url("../bg-home-1.png");
   background-position: bottom;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-attachment: fixed;
 }
 
 .header {
   border-bottom: solid 1px #b1b1b1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.header h1 {
+  color: #22a757;
+  font-family: "Oswald", sans-serif;
+  text-transform: capitalize;
+}
+
+.header .header-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.header .header-status p {
+  margin: 5px 0;
 }
 
 #info {
   color: #6e6e6e;
-  margin: 80px auto 40px;
+  margin: 120px auto 40px;
 }
 
 .game-area {
-  margin: 50px;
+  margin: 20px;
   padding: 0 50px 30px;
-  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.game-area h2 {
+  text-transform: capitalize;
+  border-bottom: solid 5px #22a757;
+  display: inline-block;
+  padding: 5px;
+}
+
+.game-area h3 strong {
+  text-transform: capitalize;
+  color: #22a757;
+  font-size: 150%;
+  display: inline-block;
+  padding: 5px;
+}
+
+.game-area img {
+  height: 150px;
+  margin: 20px;
+  box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.4);
+}
+
+.game-area.game2 img {
+    cursor: pointer;
 }
 
 #performance {
@@ -106,15 +159,40 @@ body {
 }
 
 .title {
-    text-transform: capitalize;
-    border-bottom: solid 5px #22a757;
-    display: inline-block;
-    margin:30px;
-    padding: 5px
+  text-transform: capitalize;
+  border-bottom: solid 5px #22a757;
+  display: inline-block;
+  margin: 30px;
+  padding: 5px;
 }
 
 #imageContainer img {
-    height: 250px;
-    margin: 20px;
-    box-shadow: 2px 2px 18px rgba(0,0,0,0.4);
+  height: 250px;
+  margin: 20px;
+  box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.4);
+}
+
+#hint p {
+  color: #6e6e6e;
+  font-size: 14px;
+}
+
+.result .right {
+    color: #22a757;
+}
+
+.result .wrong {
+    color: #e23a3a;
+}
+
+.result p span {
+    color: #22a757;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.result img {
+    height: 150px;
+    margin-top:-10px;
 }

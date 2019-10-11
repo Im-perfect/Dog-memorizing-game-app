@@ -6,14 +6,13 @@ export default class ResultGame2 extends React.Component {
 
     if (this.props.result !== null) {
       return this.props.result ? (
-        <div>
-          <h1>&#x2714; WOOF!</h1>
+        <div className="result">
+          <h3 className="right">&#x2714; WOOF!</h3>
         </div>
       ) : (
-          <div>
-            <h1>&#x2716;MEOW!</h1>
-            <p>Correct picture:</p>
-          
+          <div className="result">
+            <h3 className="wrong">&#x2716;MEOW!</h3>
+            <p>Correct picture:</p>        
             {this.props.imgURL1.indexOf(this.props.breed) > -1 ?
               <img src={this.props.imgURL1} height='250px' alt={this.props.imgURL1} />
               : this.props.imgURL2.indexOf(this.props.breed) > -1 ?
