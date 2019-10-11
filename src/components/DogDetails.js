@@ -21,12 +21,12 @@ export default class DogDetails extends React.Component {
 
     return (
       <div>
+        <h1 className="title">{this.props.match.params.breed}</h1>
         <Link to ='/dog-breeds'>
           <button className = 'choice-button primary narrow'>
             Back
           </button>
         </Link>
-        <h1 className="title">{this.props.match.params.breed}</h1>
         <div id="imageContainer">
           {images
             ? getRandomElements(images, 10).map(image => (
