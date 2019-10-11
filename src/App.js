@@ -9,7 +9,7 @@ import DogDetails from "./components/DogDetails";
 import StartGame1 from './components/StartGame1'
 import StartGame2 from "./components/StartGame2";
 import StartGame3 from "./components/StartGame3";
-import {initBreeds, getBreeds} from './actions/breeds'
+import {getBreeds} from './actions/breeds'
 import "./css/main.css"
 import "./App.css";
 
@@ -47,7 +47,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  initBreeds,
   getBreeds
 }
 
