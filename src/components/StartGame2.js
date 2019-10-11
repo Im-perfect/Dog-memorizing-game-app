@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import superagent from "superagent";
 import Game2 from "./Game2";
-import { correctAnswer, wrongAnswer, levelUp, resetAnswers } from '../actions/answers'
+import { correctAnswer, wrongAnswer, levelUp, resetAnswers, dogLoveLevelUp } from '../actions/answers'
 import { addMoreBreeds } from '../actions/breeds'
 import getRandomElements from '../getRandomElements'
 import { isFirstSeen, updateSeenBreeds, resetFirstSeen } from "../actions/isFirstSeen";
@@ -80,10 +80,10 @@ class StartGame2 extends React.Component {
           , 3)
         )
       }
-      if (this.props.answers.allrightAnswers > 7) {
+      if (this.props.answers.allrightAnswers > 2) {
         this.props.dogLoveLevelUp('Dog lover')
       }
-      if (this.props.answers.allrightAnswers > 12) {
+      if (this.props.answers.allrightAnswers > 4) {
         this.props.dogLoveLevelUp('Dog whisperer')
       }
       setTimeout(this.startGame, 2000)
@@ -118,6 +118,7 @@ class StartGame2 extends React.Component {
           result={this.state.result}
           isDisabled={this.state.isDisabled}
           setIsDisabled={this.setIsDisabled}
+          answers={this.state.answers}
         />
       </div >
 
@@ -130,7 +131,8 @@ const mapStateToProps = state => {
     currentBreeds: state.currentBreeds,
     dogbreeds: state.dogbreeds,
     streaks: state.answers.streaks,
-    seenBreeds: state.firstSeen.seenBreeds
+    seenBreeds: state.firstSeen.seenBreeds,
+    answers: state.answers
   };
 };
 
@@ -142,7 +144,8 @@ const mapDispatchToProps = {
   addMoreBreeds,
   updateSeenBreeds,
   isFirstSeen,
-  resetFirstSeen
+  resetFirstSeen,
+  dogLoveLevelUp
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartGame2)

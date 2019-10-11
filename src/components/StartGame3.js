@@ -7,7 +7,8 @@ import {
   correctAnswer,
   wrongAnswer,
   levelUp,
-  resetAnswers
+  resetAnswers,
+  dogLoveLevelUp,
 } from "../actions/answers";
 import { addMoreBreeds } from "../actions/breeds";
 import getRandomElements from "../getRandomElements";
@@ -112,6 +113,12 @@ class StartGame3 extends React.Component{
             )
           );
         }
+        if(this.props.answers.allrightAnswers > 2){
+          this.props.dogLoveLevelUp('Dog lover')
+        }
+        if(this.props.answers.allrightAnswers > 4){
+          this.props.dogLoveLevelUp('Dog whisperer')
+        }
         setTimeout(()=>this.startGame(Math.round(Math.random())), 1000);
       } else {
         this.setState({ result: false });
@@ -133,6 +140,12 @@ class StartGame3 extends React.Component{
               .filter(breed => !this.props.currentBreeds.includes(breed))
             , 3)
           )
+        }
+        if(this.props.answers.allrightAnswers > 2){
+          this.props.dogLoveLevelUp('Dog lover')
+        }
+        if(this.props.answers.allrightAnswers > 4){
+          this.props.dogLoveLevelUp('Dog whisperer')
         }
         setTimeout(()=>this.startGame(Math.round(Math.random())), 1000)
       }
@@ -174,6 +187,7 @@ class StartGame3 extends React.Component{
         result={this.state.result}
         isDisabled={this.state.isDisabled}
         setIsDisabled={this.setIsDisabled}
+        answers={this.state.answers}
         />
     }
 }
@@ -182,7 +196,8 @@ const mapStateToProps = state => {
     currentBreeds: state.currentBreeds,
     dogbreeds: state.dogbreeds,
     streaks: state.answers.streaks,
-    seenBreeds: state.firstSeen.seenBreeds
+    seenBreeds: state.firstSeen.seenBreeds,
+    answers: state.answers
   };
 };
 
@@ -194,6 +209,7 @@ const mapDispatchToProps = {
   addMoreBreeds,
   updateSeenBreeds,
   isFirstSeen,
-  resetFirstSeen
+  resetFirstSeen,
+  dogLoveLevelUp
 }
 export default connect(mapStateToProps,mapDispatchToProps)(StartGame3)
