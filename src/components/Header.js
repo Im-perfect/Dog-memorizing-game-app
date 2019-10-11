@@ -12,8 +12,8 @@ class Header extends React.Component {
     return (
       <div className="header">
         <Link to ='/startpage'>
-          <button className = 'choice-button primary'>
-            Back
+          <button className = 'choice-button primary narrow' id="back">
+            Home
           </button>
         </Link>
         <h3>{this.props.userName}</h3>

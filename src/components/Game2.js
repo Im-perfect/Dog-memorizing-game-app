@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import ResultGame2 from "./ResultGame2";
 import Hint from "./Hint"
 

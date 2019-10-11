@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from 'react-router-dom'
 import ResultGame1 from "./ResultGame1";
 import "../css/choiceButton.css";
 import "../css/main.css"
