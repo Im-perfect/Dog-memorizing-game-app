@@ -41,7 +41,7 @@ class Game1 extends React.Component {
 
     return (
       <div className="game-area">         
-        <h2>Question {this.props.question}</h2>
+        <h2>Question {this.props.totalAnswers+1}</h2>
         <h3>Name the breed of the dog in the picture</h3>
         <img src={this.props.imgURL} alt={this.props.breed} height="200px" />
 
