@@ -1,22 +1,45 @@
 import React from "react";
 import { connect } from "react-redux";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
-class Doglist extends React.Component {
-  render() {
-    return <div>
-        <ul>
-            {this.props.dogbreeds.map(breed => {
-                return <li key={breed}><Link to={`/dog-breeds/${breed}`}>{breed}</Link></li>
-            })}
-        </ul>
-    </div>;
+function searchingFor(term){
+  return function(word){
+    return term ? word.toLowerCase().includes(term.toLowerCase()) : !term
   }
 }
 
+class Doglist extends React.Component {
+
+  state = {
+    term: ""
+  }
+
+  searchHandler = (event) => {
+    this.setState({
+      term: event.target.value
+    })
+  }
+    render() {    
+      return (<div>
+        <h1>Dogbreeds</h1>
+
+        <form id='search-dogs'>
+        <input type="text" placeholder='Search dogs..'onChange={this.searchHandler} value={this.state.term} />
+        </form>
+
+        <ul id='list'>
+          {this.props.dogbreeds.filter(searchingFor(this.state.term)).map(breed => {
+            return <li key={breed}><Link to={`/dog-breeds/${breed}`}>{breed}</Link></li>
+          })}
+        </ul>
+     </div>)
+    }
+  }
+
+
 const mapStateToProps = state => {
   return {
-      dogbreeds: state.dogbreeds
+    dogbreeds: state.dogbreeds
   };
 };
 

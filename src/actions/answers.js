@@ -21,3 +21,10 @@ export const resetAnswers = () => {
         type: 'RESET_ANSWERS'
     }
 }
+
+export const dogLoveLevelUp = (level) => {
+    return {
+      type: 'DOG_LOVE_LEVEL_UP',
+      payload: level
+    }
+  }
