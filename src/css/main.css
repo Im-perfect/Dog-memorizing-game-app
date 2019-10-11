@@ -20,9 +20,9 @@ body {
 }
 
 #user-name {
-  margin-top: 100px;
+  padding-top: 100px;
   height: inherit;
-  background-image: url("../embark-dognames-1.jpg");
+  background-image: url("../bg-home-1.png");
   background-position: bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -79,6 +79,10 @@ body {
   height: 150px;
   margin: 20px;
   box-shadow: 2px 2px 18px rgba(0, 0, 0, 0.4);
+}
+
+.game-area.game2 img {
+    cursor: pointer;
 }
 
 #performance {

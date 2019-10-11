@@ -46,7 +46,7 @@ class Game2 extends React.Component {
   
   render() {
     return (
-      <div className="game-area">
+      <div className="game-area game2">
         <h2>Question {this.props.question}</h2>
         <h3>Choose the right picture of the <strong>{this.props.breed}</strong>!</h3>
 
@@ -81,7 +81,7 @@ class Game2 extends React.Component {
         alt={this.props.shuffledCurrentBreeds[2]} style={{display:this.props.isDisabled[2]}} />
 
         <Hint removeOneAnswer={this.removeOneAnswer} />
-        
+
         <ResultGame2 result={this.props.result} breed={this.props.breed}
           imgURL1={this.props.imgURL1}
           imgURL2={this.props.imgURL2}
