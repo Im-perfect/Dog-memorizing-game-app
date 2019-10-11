@@ -22,7 +22,7 @@ body {
 #user-name {
   margin-top: 100px;
   height: inherit;
-  background-image: url("../dogs.png");
+  background-image: url("../embark-dognames-1.jpg");
   background-position: bottom;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -171,4 +171,24 @@ body {
 #hint p {
   color: #6e6e6e;
   font-size: 14px;
+}
+
+.result .right {
+    color: #22a757;
+}
+
+.result .wrong {
+    color: #e23a3a;
+}
+
+.result p span {
+    color: #22a757;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.result img {
+    height: 150px;
+    margin-top:-10px;
 }
