@@ -5,22 +5,17 @@ import "../css/main.css"
 
 class UserPerformance extends React.Component {
   render() {
-    const { rightAnswers, totalAnswers, level } = this.props.answers;
+    const { rightAnswers, totalAnswers, level, streaks } = this.props.answers;
     return (
       <div className="UserPerformance">
         <Header />
         <ul id='performance'>
-          <li>RightAnswers: {rightAnswers}</li>
-          <li>TotalAnswers: {totalAnswers}</li>
-          <li>
-            SuccessRate:{" "}
-            {totalAnswers === 0
-              ? 0
-              : ((rightAnswers / totalAnswers) * 100).toFixed(0)}
-            %
-          </li>
+          <li>Points: {rightAnswers}</li>
+          <li>Success:{" "}{totalAnswers === 0 ? 0
+              : ((rightAnswers / totalAnswers) * 100).toFixed(0)}%</li>
           <li>Level: {level}</li>
-          <li>Current Breeds:{this.props.currentBreeds.length}</li>
+          <li>Next level: Score {5 - streaks} points in a row</li>    
+          <li>Dogbreeds:{this.props.currentBreeds.length}</li>
         </ul>
       </div>
     );

@@ -9,10 +9,10 @@ class Header extends React.Component {
       const{dogLoveLevel, allrightAnswers, alltotalAnswers} = this.props.answers
         return(
             <div className = 'header'>
-                <h2>User: {this.props.userName}</h2>
-                <h3>You are a {dogLoveLevel}!</h3>
-                <h3>Points total: {allrightAnswers} </h3>
-                <h3>Overall succesrate: {alltotalAnswers === 0 ? 0 : (allrightAnswers/alltotalAnswers*100).toFixed(0)} %</h3>
+                <h1>{this.props.userName}</h1>
+                <h3>{dogLoveLevel}</h3>
+                <h3>Total points: {allrightAnswers} </h3>
+                <h3>Total success: {alltotalAnswers === 0 ? 0 : (allrightAnswers/alltotalAnswers*100).toFixed(0)} %</h3>
             </div>
         )
     }

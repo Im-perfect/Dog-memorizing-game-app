@@ -3,7 +3,7 @@ const initialState = {
   totalAnswers: 0,
   streaks: 0,
   level: 1,
-  dogLoveLevel: 'dog lover in the making',
+  dogLoveLevel: 'Dog liker',
   allrightAnswers: 0,
   alltotalAnswers: 0,
 }
@@ -28,7 +28,6 @@ const reducer = (state = initialState, action = {}) => {
     case 'LEVEL_UP':
       return {
         ...state,
-        totalAnswers: state.totalAnswers + 1,
         streaks: 0,
         level: state.level + 1
       }

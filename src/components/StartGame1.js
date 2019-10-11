@@ -76,7 +76,7 @@ class StartGame1 extends React.Component {
         question: this.state.question + 1 
       });
       this.props.correctAnswer();
-      if (this.props.streaks === 1) {
+      if (this.props.streaks === 4) {
         this.props.levelUp();
         this.props.addMoreBreeds(
           getRandomElements(
@@ -87,14 +87,11 @@ class StartGame1 extends React.Component {
           )
         );
       }
-      if(this.props.answers.allrightAnswers > 2){
-        this.props.dogLoveLevelUp('small dog lover')
+      if(this.props.answers.allrightAnswers > 7){
+        this.props.dogLoveLevelUp('Dog lover')
       }
-      if(this.props.answers.allrightAnswers > 4){
-        this.props.dogLoveLevelUp('big dog lover')
-      }
-      if(this.props.answers.allrightAnswers > 6){
-        this.props.dogLoveLevelUp('dog whisperer')
+      if(this.props.answers.allrightAnswers > 12){
+        this.props.dogLoveLevelUp('Dog whisperer')
       }
       setTimeout(this.startGame, 1000);
     } else {
