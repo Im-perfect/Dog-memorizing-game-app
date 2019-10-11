@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {addName} from '../actions/addName'
 import { connect } from 'react-redux'
+import {addName} from '../actions/addName'
 
 class UserName extends Component {
   state = {
