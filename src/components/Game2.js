@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import ResultGame2 from "./ResultGame2";
 import Hint from "./Hint"
 
@@ -47,6 +48,11 @@ class Game2 extends React.Component {
   render() {
     return (
       <div className="game-area game2">
+        <Link to ='/startpage'>
+          <button className = 'choice-button primary'>
+            Back
+          </button>
+        </Link>
         <h2>Question {this.props.question}</h2>
         <h3>Choose the right picture of the <strong>{this.props.breed}</strong>!</h3>
 
