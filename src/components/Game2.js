@@ -46,10 +46,9 @@ class Game2 extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className="game-area">
         <h2>Question {this.props.question}</h2>
-        <p>Choose the right picture of the <b>{this.props.breed}</b>!</p>
-        <Hint removeOneAnswer={this.removeOneAnswer} />
+        <h3>Choose the right picture of the <strong>{this.props.breed}</strong>!</h3>
 
         <img onClick={
             ()=>{this.setState({ showHint: false });
@@ -81,6 +80,8 @@ class Game2 extends React.Component {
         height='150px' 
         alt={this.props.shuffledCurrentBreeds[2]} style={{display:this.props.isDisabled[2]}} />
 
+        <Hint removeOneAnswer={this.removeOneAnswer} />
+        
         <ResultGame2 result={this.props.result} breed={this.props.breed}
           imgURL1={this.props.imgURL1}
           imgURL2={this.props.imgURL2}
