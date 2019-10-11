@@ -21,7 +21,6 @@ class StartGame3 extends React.Component{
         breed: null,
         imgURL: null,
         options: [],
-        question: 1,
         imgURL1: null,
         imgURL2: null,
         imgURL3: null,
@@ -128,10 +127,7 @@ class StartGame3 extends React.Component{
     }
     checkAnswerGame2 = (option,breed) => {
       if (breed === option) {
-        this.setState({
-          question: this.state.question + 1,
-          result: true
-        })
+        this.setState({result: true})
         this.props.correctAnswer()
         if (this.props.streaks === 3) {
           this.props.levelUp()
@@ -150,10 +146,7 @@ class StartGame3 extends React.Component{
         setTimeout(()=>this.startGame(Math.round(Math.random())), 1000)
       }
       if(this.state.breed !== option) {
-        this.setState({
-          question: this.state.question + 1,
-          result: false
-        })
+        this.setState({result: false})
         this.props.wrongAnswer()
         setTimeout(()=>this.startGame(Math.round(Math.random())), 2000)
       }
@@ -173,7 +166,7 @@ class StartGame3 extends React.Component{
           checkAnswer={this.checkAnswerGame1}
           isDisabled={this.state.isDisabled}
           setIsDisabled={this.setIsDisabled}
-          question={this.state.question}
+          totalAnswers={this.props.answers.totalAnswers}
         />
       }
       return <Game2
@@ -182,7 +175,7 @@ class StartGame3 extends React.Component{
         imgURL1={this.state.imgURL1}
         imgURL2={this.state.imgURL2}
         imgURL3={this.state.imgURL3}
-        question={this.state.question}
+        totalAnswers={this.props.answers.totalAnswers}
         shuffledCurrentBreeds={this.state.options}
         result={this.state.result}
         isDisabled={this.state.isDisabled}

@@ -47,7 +47,7 @@ class Game2 extends React.Component {
   render() {
     return (
       <div>
-        <h2>Question {this.props.question}</h2>
+        <h2>Question {this.props.totalAnswers+1}</h2>
         <p>Choose the right picture of the <b>{this.props.breed}</b>!</p>
         <Hint removeOneAnswer={this.removeOneAnswer} />
 
