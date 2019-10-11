@@ -9,7 +9,6 @@ import { isFirstSeen, updateSeenBreeds, resetFirstSeen } from "../actions/isFirs
 
 class StartGame2 extends React.Component {
   state = {
-    question: 1,
     breed: null,
     imgURL1: null,
     imgURL2: null,
@@ -67,10 +66,7 @@ class StartGame2 extends React.Component {
 
   checkAnswer = (option, breed) => {
     if (breed === option) {
-      this.setState({
-        question: this.state.question + 1,
-        result: true
-      })
+      this.setState({result: true})
       this.props.correctAnswer()
       if (this.props.streaks === 4) {
         this.props.levelUp()
@@ -89,10 +85,7 @@ class StartGame2 extends React.Component {
       setTimeout(this.startGame, 2000)
     }
     if (this.state.breed !== option) {
-      this.setState({
-        question: this.state.question + 1,
-        result: false
-      })
+      this.setState({result: false})
       this.props.wrongAnswer()
       setTimeout(this.startGame, 2000)
     }
@@ -113,7 +106,7 @@ class StartGame2 extends React.Component {
           imgURL1={this.state.imgURL1}
           imgURL2={this.state.imgURL2}
           imgURL3={this.state.imgURL3}
-          question={this.state.question}
+          totalAnswers={this.props.answers.totalAnswers}
           shuffledCurrentBreeds={this.state.shuffledCurrentBreeds}
           result={this.state.result}
           isDisabled={this.state.isDisabled}

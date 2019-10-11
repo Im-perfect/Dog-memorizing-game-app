@@ -21,7 +21,6 @@ class StartGame1 extends React.Component {
     answers: [],
     result: null,
     isDisabled: ['initial', 'initial' ,'initial'],
-    question: 1
   };
 
   startGame = () => {
@@ -71,10 +70,7 @@ class StartGame1 extends React.Component {
 
   checkAnswer = answer => {
     if (answer === this.state.breed) {
-      this.setState({ 
-        result: true,
-        question: this.state.question + 1 
-      });
+      this.setState({ result: true});
       this.props.correctAnswer();
       if (this.props.streaks === 4) {
         this.props.levelUp();
@@ -87,18 +83,15 @@ class StartGame1 extends React.Component {
           )
         );
       }
-      if(this.props.answers.allrightAnswers > 7){
+      if(this.props.answers.allrightAnswers > 2){
         this.props.dogLoveLevelUp('Dog lover')
       }
-      if(this.props.answers.allrightAnswers > 12){
+      if(this.props.answers.allrightAnswers > 4){
         this.props.dogLoveLevelUp('Dog whisperer')
       }
       setTimeout(this.startGame, 1000);
     } else {
-      this.setState({ 
-        result: false,
-        question: this.state.question + 1 
-      });
+      this.setState({result: false});
       this.props.wrongAnswer();
       setTimeout(this.startGame, 2000);
     }
@@ -120,7 +113,7 @@ class StartGame1 extends React.Component {
         checkAnswer={this.checkAnswer}
         isDisabled={this.state.isDisabled}
         setIsDisabled={this.setIsDisabled}
-        question={this.state.question}
+        totalAnswers={this.props.answers.totalAnswers}
       />
     );
   }
