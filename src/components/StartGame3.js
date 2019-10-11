@@ -11,6 +11,9 @@ import {
 } from "../actions/answers";
 import { addMoreBreeds } from "../actions/breeds";
 import getRandomElements from "../getRandomElements";
+import { isFirstSeen, 
+  updateSeenBreeds, 
+  resetFirstSeen } from "../actions/isFirstSeen";
 
 class StartGame3 extends React.Component{
     state = {
@@ -22,6 +25,7 @@ class StartGame3 extends React.Component{
         imgURL2: null,
         imgURL3: null,
         result: null,
+        isDisabled: ['initial', 'initial' ,'initial']
     }
     startGame = () => {
       // get the three options to choose from
@@ -34,6 +38,12 @@ class StartGame3 extends React.Component{
       const currentBreed = options[Math.floor(Math.random() * 3)]
         // get a image of the current Breed
         // set options, currentBreed, and imgUrl of currentBreed in state
+      if (!this.props.seenBreeds.includes(currentBreed)) {
+        this.props.updateSeenBreeds(currentBreed);
+        this.props.isFirstSeen(true);
+      } else {
+        this.props.isFirstSeen(false);
+      }
         superagent
         .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
         .then(res =>
@@ -41,6 +51,7 @@ class StartGame3 extends React.Component{
             imgURL: res.body.message,
             options: options,
             breed: currentBreed,
+            isDisabled: ['initial', 'initial' ,'initial']
           })
         )
         .catch(err => console.log(err));
@@ -63,6 +74,7 @@ class StartGame3 extends React.Component{
         .get(`https://dog.ceo/api/breed/${options[2]}/images/random`)
         .then(response =>  this.setState({
           imgURL3: response.body.message,
+          isDisabled: ['initial', 'initial' ,'initial']
         }))
         .catch(err => console.log(err)); 
       this.setState({result:null})   
@@ -119,6 +131,11 @@ class StartGame3 extends React.Component{
         setTimeout(this.startGame, 2000)
       }
     }
+    setIsDisabled=(array) => {
+      this.setState({
+          isDisabled:[...array]
+      })
+  }
     render(){
       if (Math.floor(Math.random()*2)===0) {
         return <Game1
@@ -127,6 +144,9 @@ class StartGame3 extends React.Component{
           answers={this.state.options}
           result={this.state.result}
           checkAnswer={this.checkAnswerGame1}
+          isDisabled={this.state.isDisabled}
+          setIsDisabled={this.setIsDisabled}
+          question={this.state.question}
         />
       }
       return <Game2
@@ -138,6 +158,8 @@ class StartGame3 extends React.Component{
         question={this.state.question}
         shuffledCurrentBreeds={this.state.options}
         result={this.state.result}
+        isDisabled={this.state.isDisabled}
+        setIsDisabled={this.setIsDisabled}
         />
     }
 }
@@ -145,7 +167,8 @@ const mapStateToProps = state => {
   return {
     currentBreeds: state.currentBreeds,
     dogbreeds: state.dogbreeds,
-    streaks: state.answers.streaks
+    streaks: state.answers.streaks,
+    seenBreeds: state.firstSeen.seenBreeds
   };
 };
 
@@ -154,6 +177,9 @@ const mapDispatchToProps = {
   wrongAnswer,
   levelUp,
   resetAnswers,
-  addMoreBreeds
+  addMoreBreeds,
+  updateSeenBreeds,
+  isFirstSeen,
+  resetFirstSeen
 }
 export default connect(mapStateToProps,mapDispatchToProps)(StartGame3)
