@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Link} from "react-router-dom"
 
 class Header extends React.Component {
   render() {
@@ -10,6 +11,11 @@ class Header extends React.Component {
     } = this.props.answers;
     return (
       <div className="header">
+        <Link to ='/startpage'>
+          <button className = 'choice-button primary'>
+            Back
+          </button>
+        </Link>
         <h3>{this.props.userName}</h3>
         <h1>{dogLoveLevel}</h1>
         <div className="header-status">

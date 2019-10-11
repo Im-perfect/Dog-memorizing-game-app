@@ -48,11 +48,7 @@ class Game2 extends React.Component {
   render() {
     return (
       <div className="game-area game2">
-        <Link to ='/startpage'>
-          <button className = 'choice-button primary'>
-            Back
-          </button>
-        </Link>
+
         <h2>Question {this.props.totalAnswers+1}</h2>
 
         <h3>Choose the right picture of the <strong>{this.props.breed}</strong>!</h3>
