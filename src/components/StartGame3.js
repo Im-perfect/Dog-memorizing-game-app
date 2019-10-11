@@ -10,8 +10,6 @@ import {
   resetAnswers
 } from "../actions/answers";
 import { addMoreBreeds } from "../actions/breeds";
-import { updateSeenBreeds } from "../actions/handleSeenBreeds";
-import { isFirstSeen } from "../actions/isFirstSeen";
 import getRandomElements from "../getRandomElements";
 
 class StartGame3 extends React.Component{

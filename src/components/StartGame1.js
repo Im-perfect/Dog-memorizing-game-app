@@ -134,8 +134,7 @@ const mapStateToProps = state => {
     dogbreeds: state.dogbreeds,
     currentBreeds: state.currentBreeds,
     streaks: state.answers.streaks,
-    seenBreeds: state.firstSeen.seenBreeds
-    seenBreeds: state.seenBreeds,
+    seenBreeds: state.firstSeen.seenBreeds,
     answers: state.answers,
   };
 };
