@@ -25,17 +25,21 @@ class StartGame3 extends React.Component{
         imgURL2: null,
         imgURL3: null,
         result: null,
-        isDisabled: ['initial', 'initial' ,'initial']
+        isDisabled: ['initial', 'initial' ,'initial'],
+        whichGame: Math.round(Math.random())
     }
-    startGame = () => {
+    startGame = (whichGame) => {
+      const game = whichGame
       // get the three options to choose from
       const options = 
       [...this.props.currentBreeds]
         .sort(() => 0.5 - Math.random())
         .slice(0, 3)
+        console.log(options)
       //get the currentBreed
       //choose randomly from the three options
       const currentBreed = options[Math.floor(Math.random() * 3)]
+      console.log(currentBreed)
         // get a image of the current Breed
         // set options, currentBreed, and imgUrl of currentBreed in state
       if (!this.props.seenBreeds.includes(currentBreed)) {
@@ -44,6 +48,8 @@ class StartGame3 extends React.Component{
       } else {
         this.props.isFirstSeen(false);
       }
+
+      if(!this.state.whichGame) {
         superagent
         .get(`https://dog.ceo/api/breed/${currentBreed}/images/random`)
         .then(res =>
@@ -51,10 +57,14 @@ class StartGame3 extends React.Component{
             imgURL: res.body.message,
             options: options,
             breed: currentBreed,
-            isDisabled: ['initial', 'initial' ,'initial']
+            result:null,
+            isDisabled: ['initial', 'initial' ,'initial'],
+            whichGame: game
           })
         )
         .catch(err => console.log(err));
+      }
+      else {
         // get imgUrl1 for option1
         superagent
         .get(`https://dog.ceo/api/breed/${options[0]}/images/random`)
@@ -74,14 +84,18 @@ class StartGame3 extends React.Component{
         .get(`https://dog.ceo/api/breed/${options[2]}/images/random`)
         .then(response =>  this.setState({
           imgURL3: response.body.message,
-          isDisabled: ['initial', 'initial' ,'initial']
+          isDisabled: ['initial', 'initial' ,'initial'],
+          result:null,
+          whichGame: game
         }))
-        .catch(err => console.log(err)); 
-      this.setState({result:null})   
+        .catch(err => console.log(err));   
+      }
+        
+        
     }
     componentDidMount(){
       this.props.resetAnswers()
-      this.startGame()
+      this.startGame(this.state.whichGame)
     }
     checkAnswerGame1 = answer => {
       if (answer === this.state.breed) {
@@ -98,11 +112,11 @@ class StartGame3 extends React.Component{
             )
           );
         }
-        setTimeout(this.startGame, 1000);
+        setTimeout(()=>this.startGame(Math.round(Math.random())), 1000);
       } else {
         this.setState({ result: false });
         this.props.wrongAnswer();
-        setTimeout(this.startGame, 2000);
+        setTimeout(()=>this.startGame(Math.round(Math.random())), 2000);
       }
     }
     checkAnswerGame2 = (option,breed) => {
@@ -120,7 +134,7 @@ class StartGame3 extends React.Component{
             , 3)
           )
         }
-        setTimeout(this.startGame, 1000)
+        setTimeout(()=>this.startGame(Math.round(Math.random())), 1000)
       }
       if(this.state.breed !== option) {
         this.setState({
@@ -128,7 +142,7 @@ class StartGame3 extends React.Component{
           result: false
         })
         this.props.wrongAnswer()
-        setTimeout(this.startGame, 2000)
+        setTimeout(()=>this.startGame(Math.round(Math.random())), 2000)
       }
     }
     setIsDisabled=(array) => {
@@ -137,7 +151,7 @@ class StartGame3 extends React.Component{
       })
   }
     render(){
-      if (Math.floor(Math.random()*2)===0) {
+      if (!this.state.whichGame) {
         return <Game1
           breed={this.state.breed}
           imgURL={this.state.imgURL}
